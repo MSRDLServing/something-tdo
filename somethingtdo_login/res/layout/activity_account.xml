@@ -1,0 +1,92 @@
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:orientation="horizontal"
+    	android:padding="20dip">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+            	android:layout_marginBottom="15dip"
+            	android:text="Create New Account"
+            	android:textSize="20.5sp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Username"
+                android:textSize="15.5sp" />
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:singleLine="true"
+                android:ems="10" >
+
+                <requestFocus />
+            </EditText>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 android:layout_gravity="left"
+                 android:textSize="15.5sp"
+                android:text="Password" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:textSize="15.5sp"
+                android:text="Confirm Password" />
+
+            <EditText
+                android:id="@+id/password_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:singleLine="true"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/done_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sign Up" />
+
+            <Button
+                android:id="@+id/cancel_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cancel" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
