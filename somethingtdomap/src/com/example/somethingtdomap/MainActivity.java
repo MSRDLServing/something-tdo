@@ -29,8 +29,7 @@ public class MainActivity extends Activity {
 
 	public void onClick (View view) {
 		  
-		  if (view.getId() == R.id.mapbutton) 
-		  {
+		  if (view.getId() == R.id.mapbutton) {
 			  Intent myIntent = new Intent(view.getContext(), MapActivity.class);
 			  startActivityForResult(myIntent, 0);
 		  }
@@ -54,10 +53,5 @@ public class MainActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-
 
 }
