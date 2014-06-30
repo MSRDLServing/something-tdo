@@ -59,7 +59,7 @@ public class SetDateActivity extends FragmentActivity {
     		mYear = b.getInt("set_year");
     		
     		//TO-DO:- Add to shared preference
-    		savingPreference(Integer.toString(mDay),Integer.toString(mMonth),Integer.toString(mYear));
+    		savingPreference(Integer.toString(mDay),Integer.toString(mMonth+1),Integer.toString(mYear));
     		savedDate.setText(retrievePreference());
     		/** Displaying a short time message containing date set by Date picker dialog fragment */
     		Toast.makeText(getBaseContext(), b.getString("set_date"), Toast.LENGTH_SHORT).show();
@@ -78,7 +78,7 @@ public class SetDateActivity extends FragmentActivity {
 	
 	public String retrievePreference(){
 		
-		SharedPreferences date = getSharedPreferences("date",0);
+//		SharedPreferences date = getSharedPreferences("date",0);
 		setDate = (date.getString("Day","n/a"));
 		setDate += "/";
 		setDate += (date.getString("Month","n/a"));
