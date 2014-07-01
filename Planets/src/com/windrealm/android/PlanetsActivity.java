@@ -24,8 +24,8 @@ public class PlanetsActivity extends Activity {
   private static final String TAG = "Interest";	
 	
   private ListView mainListView ;
-  private Planet[] planets ;
-  private ArrayAdapter<Planet> listAdapter ;
+  private Interest[] interests ;
+  private ArrayAdapter<Interest> listAdapter ;
   
   /** Called when the activity is first created. */
   @Override
@@ -42,7 +42,7 @@ public class PlanetsActivity extends Activity {
       public void onItemClick( AdapterView<?> parent, View item, 
                                int position, long id) {
     	  //If the item/position equals to the "all" check box, then for every item/row in the list view, set them checked.
-        Planet planet = listAdapter.getItem( position );
+        Interest planet = listAdapter.getItem( position );
         planet.toggleChecked();
         PlanetViewHolder viewHolder = (PlanetViewHolder) item.getTag();
         viewHolder.getCheckBox().setChecked( planet.isChecked() );
@@ -51,18 +51,17 @@ public class PlanetsActivity extends Activity {
 
     
     // Create and populate planets.
-    planets = (Planet[]) getLastNonConfigurationInstance() ;
-    if ( planets == null ) {
-      planets = new Planet[] { 
-          new Planet("Mercury"), new Planet("Venus"), new Planet("Earth"), 
-          new Planet("Mars"), new Planet("Jupiter"), new Planet("Saturn"), 
-          new Planet("Uranus"), new Planet("Neptune"), new Planet("Ceres"),
-          new Planet("Pluto"), new Planet("Haumea"), new Planet("Makemake"),
-          new Planet("Eris")
+    interests = (Interest[]) getLastNonConfigurationInstance() ;
+    if ( interests == null ) {
+      interests = new Interest[] { 
+    		  new Interest("Concert","music"), new Interest("Comedy","comedy"), new Interest("Performing Arts","performing_arts"), 
+	          new Interest("Sports","sports"), new Interest("Film","movies-film"), new Interest("Galleries","art"), 
+	          new Interest("Literary","books"), new Interest("Food","food"), new Interest("Festivals","festivals_parades")
+	
       };  
     }
-    ArrayList<Planet> planetList = new ArrayList<Planet>();
-    planetList.addAll( Arrays.asList(planets) );
+    ArrayList<Interest> planetList = new ArrayList<Interest>();
+    planetList.addAll( Arrays.asList(interests) );
     
     // Set our custom array adapter as the ListView's adapter.
     listAdapter = new PlanetArrayAdapter(this, planetList);
@@ -70,12 +69,12 @@ public class PlanetsActivity extends Activity {
   }
   
   public void onPickInterestClick(View v) {
-	int len = planets.length;
+	int len = interests.length;
 	String msg = "";
 	for (int i = 0; i < len; i++) {
-		if (planets[i].isChecked()) {
-			Log.d(TAG, planets[i].getName());
-			msg += (planets[i].getName() + ":");
+		if (interests[i].isChecked()) {
+			Log.d(TAG, interests[i].getId());
+			msg += (interests[i].getId() + ":");
 		}
 	}
 	Log.d(TAG, "All selected:" + msg);
@@ -83,10 +82,10 @@ public class PlanetsActivity extends Activity {
   }
   
   public void onSelectAllClick(View v) {
-	int len = planets.length;
+	int len = interests.length;
 	String msg = "";
 	for (int i = 0; i < len; i++) {
-		planets[i].setChecked(true);
+		interests[i].setChecked(true);
 //		if (planets[i].isChecked()) {
 //			Log.d(TAG, planets[i].getName());
 //			msg += (planets[i].getName() + ":");
@@ -105,10 +104,10 @@ public class PlanetsActivity extends Activity {
   }
   
   public void onUnselectAllClick(View v) {
-	int len = planets.length;
+	int len = interests.length;
 	String msg = "";
 	for (int i = 0; i < len; i++) {
-		planets[i].setChecked(false);
+		interests[i].setChecked(false);
 //		if (planets[i].isChecked()) {
 //			Log.d(TAG, planets[i].getName());
 //			msg += (planets[i].getName() + ":");
@@ -127,14 +126,23 @@ public class PlanetsActivity extends Activity {
   }
   
   /** Holds planet data. */
-  private static class Planet {
+  private static class Interest {
     private String name = "" ;
-    private boolean checked = false ;
-    public Planet() {}
-    public Planet( String name ) {
+    private String id;
+    
+    public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	private boolean checked = false ;
+    public Interest() {}
+    public Interest( String name, String id) {
       this.name = name ;
+      this.id = id;
     }
-    public Planet( String name, boolean checked ) {
+    public Interest( String name, boolean checked ) {
       this.name = name ;
       this.checked = checked ;
     }
@@ -182,11 +190,11 @@ public class PlanetsActivity extends Activity {
   }
   
   /** Custom adapter for displaying an array of Planet objects. */
-  private static class PlanetArrayAdapter extends ArrayAdapter<Planet> {
+  private static class PlanetArrayAdapter extends ArrayAdapter<Interest> {
     
     private LayoutInflater inflater;
     
-    public PlanetArrayAdapter( Context context, List<Planet> planetList ) {
+    public PlanetArrayAdapter( Context context, List<Interest> planetList ) {
       super( context, R.layout.interest_row, R.id.rowTextView, planetList );
       // Cache the LayoutInflate to avoid asking for a new one each time.
       inflater = LayoutInflater.from(context) ;
@@ -195,7 +203,7 @@ public class PlanetsActivity extends Activity {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
       // Planet to display
-      Planet planet = (Planet) this.getItem( position ); 
+      Interest planet = (Interest) this.getItem( position ); 
 
       // The child views in each row.
       CheckBox checkBox ; 
@@ -218,7 +226,7 @@ public class PlanetsActivity extends Activity {
         checkBox.setOnClickListener( new View.OnClickListener() {
           public void onClick(View v) {
             CheckBox cb = (CheckBox) v ;
-            Planet planet = (Planet) cb.getTag();
+            Interest planet = (Interest) cb.getTag();
             planet.setChecked( cb.isChecked() );
           }
         });        
@@ -246,6 +254,6 @@ public class PlanetsActivity extends Activity {
   }
   
   public Object onRetainNonConfigurationInstance() {
-    return planets ;
+    return interests ;
   }
 }

@@ -7,11 +7,6 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onPickInterestClick"
-        android:text="@string/add_interest" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:onClick="onSelectAllClick"
         android:text="@string/select_all" />
     
@@ -26,5 +21,11 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:choiceMode="multipleChoice" />
+    
+        <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onPickInterestClick"
+        android:text="@string/add_interest" />
 
 </LinearLayout>
