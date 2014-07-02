@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, SimpleListViewActivity!</string>
+    <string name="app_name">Preference List</string>
+    <string name="add_interest">Choose Interests</string>
+    <string name="select_all">Select All</string>
+    <string name="unselect_all">Unselect All</string>
+
+</resources>
