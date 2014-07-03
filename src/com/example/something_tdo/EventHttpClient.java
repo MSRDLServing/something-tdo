@@ -10,14 +10,18 @@ import android.util.Log;
 
 public class EventHttpClient {
 
+		public static final int PAGE_SIZE = 10;
 		private static final String TAG = "EventHttpClient";
 		private static String API_URL = "http://api.eventful.com/json/events/get?";
+		private static String SORT_URL = "&sort_order=date";
 		private static String KEY_URL = "&app_key=ZG2zx9XgLFMGcGM9";
-		private static String SIZE_URL = "&page_size=1";
+		private static String SIZE_URL = "&page_size=" + PAGE_SIZE;
 		private static String PAGE_URL = "&page_number=";
-		private static String BASE_URL = API_URL + KEY_URL + SIZE_URL + PAGE_URL;
+		private static String LOCATION_URL ="&location=";
+		private static String DATE_URL ="&date=";
+		private static String FILTER_URL = "&category=";
+		private static String BASE_URL = API_URL + SORT_URL + KEY_URL + SIZE_URL + PAGE_URL;
 		
-
 		/**
 		 * Fetches and returns the string representing event information for a
 		 * given location.
@@ -27,8 +31,8 @@ public class EventHttpClient {
 		 * @return String representing the event information.
 		 * @throws IOException
 		 */
-		public String getWeatherData(String location) throws IOException {
-			URL url = new URL(BASE_URL + location); // can throw exception
+		public String getEventsData(int pageNo, String location, String date, String filter) throws IOException {
+			URL url = new URL(BASE_URL + pageNo + LOCATION_URL + location + DATE_URL + date + FILTER_URL + filter); // can throw exception
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
 			String out;
@@ -60,5 +64,4 @@ public class EventHttpClient {
 			in.close();
 			return buffer.toString();
 		}
-
 }

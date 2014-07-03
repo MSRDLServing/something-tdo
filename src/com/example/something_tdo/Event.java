@@ -13,8 +13,8 @@ public class Event {
 	String mZipCode;
 	Float mLongitude;
 	Float mLatitude;
-	Date mDate;
-	Date mStartTime;
+	String mDate; //in ISO 8601 format (e.g. "2005-03-01 19:00:00").
+	String mStartTime; //in ISO 8601 format (e.g. "2005-03-01 19:00:00").
 	String mDescription;
 	
 	public String getTitle() {
@@ -58,11 +58,11 @@ public class Event {
 	}
 	
 	public Date getDate() {
-		return mDate;
+		return convertDate(mDate);
 	}
 	
 	public Date getStartTime() {
-		return mStartTime;
+		return convertDate (mStartTime);
 	}
 	
 	public String getDescription() {
@@ -109,11 +109,11 @@ public class Event {
 		this.mLatitude = mLatitude;
 	}
 	
-	public void setDate(Date mDate) {
+	public void setDate(String mDate) {
 		this.mDate = mDate;
 	}
 	
-	public void setStartTime(Date mStartTime) {
+	public void setStartTime(String mStartTime) {
 		this.mStartTime = mStartTime;
 	}
 	
@@ -127,5 +127,10 @@ public class Event {
 		String string = null;
 		string = string + mTitle + " - " + mCity + ", " + mState;
 		return string;
+	}
+	private Date convertDate(String input){
+		Date result = new Date();
+		
+		return result;
 	}
 }
