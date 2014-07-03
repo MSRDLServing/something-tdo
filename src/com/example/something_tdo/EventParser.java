@@ -15,10 +15,11 @@ public class EventParser {
 		parseData();
 	}
 	
-	public EventParser(String data, Events eventArray) throws JSONException {
-		mData = new JSONObject(data);
-		parseData();
-	}
+// implement latter
+//	public EventParser(String data, Events eventArray) throws JSONException {
+//		mData = new JSONObject(data);
+//		parseData();
+//	}
 
 	private void parseData() throws JSONException {
 		int resultCount = mData.getInt("total_items");
