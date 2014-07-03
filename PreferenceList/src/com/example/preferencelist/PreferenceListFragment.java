@@ -1,16 +1,21 @@
 package com.example.preferencelist;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PreferenceListFragment extends ListFragment {
 
@@ -22,6 +27,9 @@ public class PreferenceListFragment extends ListFragment {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        setHasOptionsMenu(true); //Notify the OS to create action bar.
+        
         getActivity().setTitle(R.string.app_name);
         mPreferences = PreferenceLab.get(getActivity()).getPreferences();
     
@@ -81,5 +89,71 @@ public class PreferenceListFragment extends ListFragment {
             return convertView;
         }
     }
+	
+	//Action bar
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	    super.onCreateOptionsMenu(menu, inflater);
+	    inflater.inflate(R.menu.preference_options_menu, menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Preference s;
+    	String msg = "";
+    	Iterator<Preference> e = mPreferences.iterator();
+    	ListView lv = getListView();
+    	int num = lv.getChildCount();
+    	CheckBox checkBox;
+	    switch (item.getItemId()) {
+	        case R.id.menu_item_choose_interest:
+	        	
+	        	while (e.hasNext())
+	        	{
+	        	    s = (Preference)e.next();
+	        	    if (s.isChecked()) {
+	        	    	Log.d(TAG, s.getId());
+	        	    	msg += (s.getId() + ":");
+	        	    }
+	        	}
+	        	Log.d(TAG, "All selected:" + msg);
+	        	Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+
+//	            Intent i = new Intent(getActivity(), CrimePagerActivity.class);
+//	            i.putExtra(PreferenceFragment.EXTRA_CRIME_ID, crime.getId());
+//	            startActivityForResult(i, 0);
+	            return true;
+	        case R.id.menu_item_select_all:
+	        	
+	        	while (e.hasNext())
+	        	{
+	        	    s = (Preference)e.next();
+	        	    s.setChecked(true);
+	        	}
+	        	
+	        	for (int i = 0; i < num; i++) {
+	        		View row = lv.getChildAt(i);
+	        		checkBox = (CheckBox)row.findViewById( R.id.CheckBox01);
+	        		checkBox.setChecked(true);
+	        	}
+	        	return true;
+	        case R.id.menu_item_unselect_all:
+	        	while (e.hasNext())
+	        	{
+	        	    s = (Preference)e.next();
+	        	    s.setChecked(false);
+	        	}
+	        	
+	        	for (int i = 0; i < num; i++) {
+	        		View row = lv.getChildAt(i);
+	        		checkBox = (CheckBox)row.findViewById( R.id.CheckBox01);
+	        		checkBox.setChecked(false);
+	        	}
+	        	return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+
 
 }
