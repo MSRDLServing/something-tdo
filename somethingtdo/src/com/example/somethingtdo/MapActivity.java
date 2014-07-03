@@ -83,6 +83,7 @@ public class MapActivity extends Activity {
             googleMap.setMyLocationEnabled(true);
             googleMap.getUiSettings().setMyLocationButtonEnabled(true);            
 
+/*
     		double lat = 39.960103547869075;
     		double lon = -82.99892485141754;
     		String title = "Sample Symphony";
@@ -104,6 +105,7 @@ public class MapActivity extends Activity {
 					"A Local Band";            
             
             createMarkers(lat2, lon2, title2, snippet2, BitmapDescriptorFactory.HUE_GREEN);
+*/
 
         }
 	}
