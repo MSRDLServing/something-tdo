@@ -51,7 +51,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 			editor.commit();
 
 			// Bring up the GameOptions screen
-			startActivity(new Intent(this, PrefsActivity.class));
+			startActivity(new Intent(this, PreferenceActivity.class));
 //			 startActivity(new Intent(this, DummyActivity.class));
 			
 //			  Intent myIntent = new Intent(this, MainActivity.class);
