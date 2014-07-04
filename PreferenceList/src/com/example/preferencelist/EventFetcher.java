@@ -23,6 +23,8 @@ public class EventFetcher{
     private static final String API_KEY = "m6Wj5dR94NQ5jhs5";
     private static final String METHOD_SEARCH = "/events/search";
     private static final String PARAM_LOCATION = "location";
+    private static final String PARAM_FILTER = "category";
+    private static final String PARAM_DATE = "date";
 
     private final static String LOCAL_DATA="event_columbus.xml";
     
@@ -91,12 +93,14 @@ public class EventFetcher{
     	ArrayList<Event> items = new ArrayList<Event>();
     	
         try {
-			String url = new URL(BASE_URL + pageNo + LOCATION_URL + location + DATE_URL + date + FILTER_URL + filter).toString(); // can throw exception
+//			String url = new URL(BASE_URL + pageNo + LOCATION_URL + location + DATE_URL + date + FILTER_URL + filter).toString(); // can throw exception
 			
-//            String url = Uri.parse(ENDPOINT + METHOD_SEARCH).buildUpon()
-//                    .appendQueryParameter("app_key", API_KEY)
-//                    .appendQueryParameter(PARAM_LOCATION, "Columbus")
-//                    .build().toString();
+            String url = Uri.parse(ENDPOINT + METHOD_SEARCH).buildUpon()
+                    .appendQueryParameter("app_key", API_KEY)
+                    .appendQueryParameter(PARAM_LOCATION, "Columbus")
+                    .appendQueryParameter(PARAM_FILTER, "music")
+                    .appendQueryParameter(PARAM_DATE, "Today")
+                    .build().toString();
 //            String url = "http://api.eventful.com/rest/events/search?app_key=m6Wj5dR94NQ5jhs5&location=Columbus";
             String xmlString = getUrl(url);
             Log.i(TAG, "Received xml: " + xmlString);
@@ -166,7 +170,7 @@ public class EventFetcher{
 	        } else if (xpp.getName().equals(LOCATION_TAG)) {
 	        	eventType = xpp.next();
 	        	if (eventType == XmlPullParser.TEXT) {
-	        		item.setVenue(xpp.getText());
+	        		item.setStreetAddress(xpp.getText());
 	        	}
 	            Log.d(TAG, " Added location:" + xpp.getText());
 	        } else if (xpp.getName().equals(DESCRIPTION_TAG)) {

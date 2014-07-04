@@ -101,9 +101,9 @@ public class PreferenceListFragment extends ListFragment {
 	    inflater.inflate(R.menu.preference_options_menu, menu);
 	}
 	
-	public String removeLastComma(String str) {
+	public String removeLast(String str) {
 
-	  if (str.length() > 0 && str.charAt(str.length()-1)==':') {
+	  if (str.length() > 0 && str.charAt(str.length()-1)==',') {
 	    str = str.substring(0, str.length()-1);
 	  }
 	  return str;
@@ -125,11 +125,11 @@ public class PreferenceListFragment extends ListFragment {
 	        	    s = (Preference)e.next();
 	        	    if (s.isChecked()) {
 	        	    	Log.d(TAG, s.getId());
-	        	    	msg += (s.getId() + ":");
+	        	    	msg += (s.getId() + ",");
 	        	    	
 	        	    }
 	        	}
-	        	msg = removeLastComma(msg);
+	        	msg = removeLast(msg);
 	        	Log.d(TAG, "All selected:" + msg);
 	        	Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
 

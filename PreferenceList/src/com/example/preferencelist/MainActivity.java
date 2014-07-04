@@ -170,6 +170,9 @@ public class MainActivity extends Activity implements OnItemClickListener {
         	String selectedInterests = PreferenceManager.getDefaultSharedPreferences(this)
                     .getString(PreferenceListFragment.SELECTED_INTEREST, null);
         	Log.d(TAG, " selectedInterests retrieved:" + selectedInterests);
+            Intent i = new Intent(this, ListViewActivity.class);
+//            i.putExtra(PreferenceFragment.EXTRA_CRIME_ID, crime.getId());
+            startActivity(i);
     	}
     	
         //Update the background color of the main content
