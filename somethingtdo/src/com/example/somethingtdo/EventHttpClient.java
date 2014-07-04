@@ -12,7 +12,7 @@ public class EventHttpClient {
 
 		public static final int PAGE_SIZE = 10;
 		private static final String TAG = "EventHttpClient";
-		private static String API_URL = "http://api.eventful.com/json/events/get?";
+		private static String API_URL = "http://api.eventful.com/json/events/search?";
 		private static String SORT_URL = "&sort_order=date";
 		private static String KEY_URL = "&app_key=ZG2zx9XgLFMGcGM9";
 		private static String SIZE_URL = "&page_size=" + PAGE_SIZE;

@@ -49,7 +49,7 @@ public class Event {
 		return mZipCode;
 	}
 	
-	public Float getLognitude() {
+	public Float getLongitude() {
 		return mLongitude;
 	}
 	
@@ -123,9 +123,9 @@ public class Event {
 
 	@Override
 	public String toString() {
-		super.toString();
+//		super.toString();
 		String string = null;
-		string = string + mTitle + " - " + mCity + ", " + mState;
+		string = mTitle + " - " + mCity + ", " + mState;
 		return string;
 	}
 	private Date convertDate(String input){

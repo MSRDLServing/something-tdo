@@ -1,9 +1,15 @@
 package com.example.somethingtdo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.json.JSONException;
+
+//import com.example.somethingtdo.JSONEvent;
+
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -114,7 +120,7 @@ public class PreferenceListFragment extends ListFragment {
 	        	    s = (Preference)e.next();
 	        	    if (s.isChecked()) {
 	        	    	Log.d(TAG, s.getId());
-	        	    	msg += (s.getId() + ":");
+	        	    	msg += (s.getId() + ",");
 	        	    }
 	        	}
 	        	Log.d(TAG, "All selected:" + msg);
@@ -122,7 +128,34 @@ public class PreferenceListFragment extends ListFragment {
 
 //	            Intent i = new Intent(getActivity(), MapActivity.class);
 //	            i.putExtra(PreferenceFragment.EXTRA_CRIME_ID, .getId());
-//	            startActivityForResult(i, 0);
+//	            startActivityForResult(i, 0)
+	        	
+//	        	JSONEvent je = new JSONEvent();
+	        	
+//        	new JSONEvent().execute("1 Columbus today music,comedy");
+
+/*	        	
+	        System.out.println("!!!Pre try");
+			String data = null;
+			try {
+				data = ((new EventHttpClient()).getEventsData(1, "Columbus", "today", "music,comedy"));
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				System.out.println("!!!Http client");
+				
+				e1.printStackTrace();
+			}
+	        	
+	        	Events events = null;
+			try {
+				events = (new EventParser(data)).getEvents();
+			} catch (JSONException e1) {
+				// TODO Auto-generated catch block
+				System.out.println("!!!Event Parser");
+				e1.printStackTrace();
+			}
+*/
+	        	
 	        	startActivity(new Intent(getActivity(), MapActivity.class));
 	            return true;
 	        case R.id.menu_item_select_all:
@@ -152,10 +185,64 @@ public class PreferenceListFragment extends ListFragment {
 	        		checkBox.setChecked(false);
 	        	}
 	        	return true;
+	        case R.id.setdate:
+	        	startActivity(new Intent(getActivity(), SetDateActivity.class));
+	        	return true;
+	        case R.id.setloc:
+	        	startActivity(new Intent(getActivity(), SetLocationActivity.class));
+	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
+	
+	
+/*
+	class JSONEvent extends AsyncTask<String, Integer, Events>  {
+
+
+		private static final String TAG = "JSONEventsTask";
+
+		@Override
+		protected Events doInBackground(String... params) {
+			String data = null;
+			try {
+				data = ((new EventHttpClient()).getEventsData(1, "Columbus", "today", "music,comedy"));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			Log.d("SUCCESS", data);
+			
+
+//			Log.d("Before Event Parser",null);
+			System.out.println("Before EventParser");
+			Events events = null;
+			try {
+				events = (new EventParser(data)).getEvents();
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			
+			System.out.println("After EventParser");
+			
+//			System.out.println(events.getEvent(0).toString());
+						
+			return events;
+		}
+		
+		
+	
+		protected void onProgressUpdate(Integer ...progress) {
+			setProgressPercent(progress[0]);
+	    }
+
+	    protected void onPostExecute(Event events) {
+	        // TODO: check this.exception 
+	        // TODO: do something with the feed
+	    }
+
+	}
+*/
 
 
 }

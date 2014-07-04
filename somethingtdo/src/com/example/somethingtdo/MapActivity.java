@@ -1,5 +1,9 @@
 package com.example.somethingtdo;
 
+import java.io.IOException;
+
+import org.json.JSONException;
+
 import com.example.somethingtdo.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -10,25 +14,26 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 
-import android.R.string;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MapActivity extends Activity {
+
 	
 	class CustomInfoWindowAdapter implements InfoWindowAdapter {
-
+		 
 		@Override
 		public View getInfoContents(Marker marker) {
 			// TODO Auto-generated method stub
@@ -64,6 +69,9 @@ public class MapActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
 		
+		
+//		System.out.println(mEvents.getEvent(0).toString());
+		
         if (googleMap == null) {
             googleMap = ((MapFragment) getFragmentManager().findFragmentById(
                     R.id.map)).getMap();
@@ -75,13 +83,15 @@ public class MapActivity extends Activity {
                         "Sorry! unable to create maps", Toast.LENGTH_SHORT)
                         .show();
             }
-            
+    		new JSONEvent().execute("1 Columbus today music,comedy");
 
             googleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter());
             
             googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             googleMap.setMyLocationEnabled(true);
-            googleMap.getUiSettings().setMyLocationButtonEnabled(true);            
+            googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+            
+    		new JSONEvent().execute("1 Columbus today music,comedy");
 
 /*
     		double lat = 39.960103547869075;
@@ -112,13 +122,68 @@ public class MapActivity extends Activity {
 	
 	private void createMarkers(double lat, double lon, String title, String snippet, float hue) {
 	
+		String snip;
+	
 		MarkerOptions marker = new MarkerOptions().position(new LatLng(lat, lon))
     			.title(title)
-    			.snippet(snippet)
+    			.snippet("\n" + snippet)
     			.icon(BitmapDescriptorFactory.defaultMarker(hue));
 		
 		googleMap.addMarker(marker);	
 		
+	}
+	
+	class JSONEvent extends AsyncTask<String, Integer, Events>  {
+
+
+		private static final String TAG = "JSONEventsTask";
+
+		@Override
+		protected Events doInBackground(String... params) {
+			String data = null;
+			try {
+				data = ((new EventHttpClient()).getEventsData(1, "Columbus", "today", "music,comedy"));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			Log.d("SUCCESS", data);
+			
+
+//			Log.d("Before Event Parser",null);
+			System.out.println("Before EventParser");
+			Events events = null;
+			try {
+				events = (new EventParser(data)).getEvents();
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			
+			System.out.println("After EventParser");
+			
+//			System.out.println(events.getEvent(0).toString());
+						
+			
+			return events;
+		}
+		
+		
+/*		
+		protected void onProgressUpdate(Integer ...progress) {
+			setProgressPercent(progress[0]);
+	    }
+*/
+	    protected void onPostExecute(Events mEvents) {
+	        // TODO: check this.exception 
+	        // TODO: do something with the feed
+	    	
+	    	//System.out.println("MapsActivity " + mEvents.getEvent(0).toString());
+	    	
+	    	for (int i = 0; i < 10; i++){ 
+	    		Event ev = mEvents.getEvent(i);
+	    		createMarkers(ev.getLatitude(), ev.getLongitude(), ev.getTitle(), ev.getVenue(), BitmapDescriptorFactory.HUE_RED);
+	    	}
+	    }
+
 	}
 	
 }
