@@ -2,7 +2,7 @@
 <resources>
 
     <string name="hello">Hello World, SimpleListViewActivity!</string>
-    <string name="app_name">Preference List</string>
+    <string name="app_name">EventChaser</string>
     <string name="add_interest">Choose Interests</string>
     <string name="select_all">Select All</string>
     <string name="unselect_all">Unselect All</string>

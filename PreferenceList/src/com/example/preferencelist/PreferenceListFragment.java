@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.Menu;
@@ -21,6 +22,7 @@ public class PreferenceListFragment extends ListFragment {
 
     private static final String TAG = "PreferenceListFragment";
 
+    public static final String SELECTED_INTEREST = "selectedInterests";
 	
 	private ArrayList<Preference> mPreferences;
 	
@@ -33,6 +35,8 @@ public class PreferenceListFragment extends ListFragment {
         getActivity().setTitle(R.string.app_name);
         mPreferences = PreferenceLab.get(getActivity()).getPreferences();
     
+//        mPreferences = PreferenceLab.get(getActivity()).loadPreferences();
+        
         PreferenceAdapter adapter = new PreferenceAdapter(mPreferences);
         setListAdapter(adapter);
 	}
@@ -97,6 +101,14 @@ public class PreferenceListFragment extends ListFragment {
 	    inflater.inflate(R.menu.preference_options_menu, menu);
 	}
 	
+	public String removeLastComma(String str) {
+
+	  if (str.length() > 0 && str.charAt(str.length()-1)==':') {
+	    str = str.substring(0, str.length()-1);
+	  }
+	  return str;
+	}
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Preference s;
@@ -114,11 +126,19 @@ public class PreferenceListFragment extends ListFragment {
 	        	    if (s.isChecked()) {
 	        	    	Log.d(TAG, s.getId());
 	        	    	msg += (s.getId() + ":");
+	        	    	
 	        	    }
 	        	}
+	        	msg = removeLastComma(msg);
 	        	Log.d(TAG, "All selected:" + msg);
 	        	Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
 
+	        	PreferenceLab.get(getActivity()).savePreferences();
+	        	
+	        	PreferenceManager.getDefaultSharedPreferences(getActivity())
+	            .edit()
+	            .putString(SELECTED_INTEREST, msg)
+	            .commit();
 //	            Intent i = new Intent(getActivity(), CrimePagerActivity.class);
 //	            i.putExtra(PreferenceFragment.EXTRA_CRIME_ID, crime.getId());
 //	            startActivityForResult(i, 0);
