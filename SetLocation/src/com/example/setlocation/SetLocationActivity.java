@@ -54,12 +54,19 @@ public class SetLocationActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_set_location);
 		
+		mCityName = (EditText)findViewById(R.id.edit);
+		
 		GPSTracker gpsTracker = new GPSTracker(this);
+		
 		if(gpsTracker.canGetLocation()){
 			
 			latitude = gpsTracker.latitude;
 			longitude = gpsTracker.longitude;
+			mCityName.setText(gpsTracker.getLocality(this));
 			savingPreference(latitude, longitude);
+			latlng = new LatLng(latitude,longitude);
+			Toast.makeText(getApplicationContext(),"The current loaction set is "+ mCityName.getText()+ latlng.toString(),Toast.LENGTH_LONG).show();
+			
 		}
 		else{
 			gpsTracker.showSettingsAlert();
@@ -70,8 +77,7 @@ public class SetLocationActivity extends Activity implements OnClickListener {
 		}*/
 		
 		mSetLocation = (Button)findViewById(R.id.button1);
-		mCityName = (EditText)findViewById(R.id.edit);
-		mCityName.setText(gpsTracker.getLocality(this));
+		
 		//latlng = getLocation();
 		
 		mSetLocation.setOnClickListener(this);
@@ -85,7 +91,7 @@ public class SetLocationActivity extends Activity implements OnClickListener {
 		slocation_editor.commit();
 	}
 	
-public LatLng retrievePreference(){
+	public LatLng retrievePreference(){
 		LatLng slatlong= null;
 //		SharedPreferences date = getSharedPreferences("date",0);
 		latitude = (slocation.getLong("lat",0));

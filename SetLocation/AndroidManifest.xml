@@ -8,6 +8,11 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
     
+   	 <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+		<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+		<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -15,8 +20,7 @@
         android:theme="@style/AppTheme" >
         
         <uses-library android:name="com.google.android.maps" />
-        <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-		<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+        
         <activity
             android:name="com.example.setlocation.SetLocationActivity"
             android:label="@string/app_name" >

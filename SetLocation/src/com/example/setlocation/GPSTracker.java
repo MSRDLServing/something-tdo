@@ -33,7 +33,7 @@ public class GPSTracker extends Service implements LocationListener
 
     boolean canGetLocation = false;
 
-    Location location;
+    Location location = null;
     double latitude;
     double longitude;
 
@@ -49,7 +49,7 @@ public class GPSTracker extends Service implements LocationListener
     public GPSTracker(Context context) 
     {
         this.mContext = context;
-        getLocation();
+        location = getLocation();
     }
 
     public Location getLocation()
@@ -67,10 +67,11 @@ public class GPSTracker extends Service implements LocationListener
             if (!isGPSEnabled && !isNetworkEnabled)
             {
                 // no network provider is enabled
+            	Log.d("not working!","not working");
             }
             else
             {
-                this.canGetLocation = true;
+               // this.canGetLocation = true;
 
                 //First get location from Network Provider
                 if (isNetworkEnabled)
@@ -92,7 +93,7 @@ public class GPSTracker extends Service implements LocationListener
                 //if GPS Enabled get lat/long using GPS Services
                 if (isGPSEnabled)
                 {
-                    if (location == null)
+                   if (location == null)
                     {
                         locationManager.requestLocationUpdates(
                                 LocationManager.GPS_PROVIDER,
@@ -101,7 +102,7 @@ public class GPSTracker extends Service implements LocationListener
 
                         Log.d("GPS Enabled", "GPS Enabled");
 
-                        if (locationManager != null)
+                       if (locationManager != null)
                         {
                             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                             updateGPSCoordinates();
@@ -115,7 +116,7 @@ public class GPSTracker extends Service implements LocationListener
             //e.printStackTrace();
             Log.e("Error : Location", "Impossible to connect to LocationManager", e);
         }
-
+        this.canGetLocation = true;	
         return location;
     }
 
@@ -272,7 +273,8 @@ public class GPSTracker extends Service implements LocationListener
         }
         else
         {
-            return null;
+            
+        	return null;
         }
     }
 
