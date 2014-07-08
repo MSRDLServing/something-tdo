@@ -79,14 +79,36 @@ public class SetDateActivity extends FragmentActivity {
 	public String retrievePreference(){
 		
 //		SharedPreferences date = getSharedPreferences("date",0);
-		setDate = (date.getString("Day","n/a"));
+		/*setDate = (date.getString("Day","n/a"));
 		setDate += "/";
 		setDate += (date.getString("Month","n/a"));
 		setDate += "/";
-		setDate += (date.getString("Year","n/a"));
+		setDate += (date.getString("Year","n/a"));*/
+
+		setDate = (date.getString("Year","n/a"));
+		setDate += (date.getString("Month","n/a"));
+		setDate += (date.getString("Day","n/a"));
+		setDate +="00"
+		
 		
 		return setDate;
 	}
+
+// return 7 days from the date set
+
+	public String getEndDate(){
+		String endDate= null;
+		SharedPreferences date =  getSharedPreferences("date",0);
+		String startDay = (date.getString("Day","n/a"));
+		int mEndDay = (Integer.parseInt(startDay)+7);
+		endDate = (date.getString("Year","n/a"));
+		endDate += (date.getString("Month","n/a"));
+		endDate += Integer.toString(mEndDay);
+		endDate += "00"
+			
+		return endDate;
+}
+		
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
