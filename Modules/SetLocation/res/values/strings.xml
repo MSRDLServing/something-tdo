@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SetLocation</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="GPSAlertDialogTitle">Error!</string>
+	<string name="GPSAlertDialogMessage">Unable to get current location. Please check your settings.</string>
+	<string name="settings">Settings</string>
+	<string name="cancel">Cancel</string>
+</resources>
