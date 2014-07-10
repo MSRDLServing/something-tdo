@@ -1,5 +1,6 @@
 package com.example.somethingtdo;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import com.example.somethingtdo.DatePickerDialogFragment;
@@ -88,7 +89,7 @@ public class SetDateActivity extends FragmentActivity {
 		setDate = (date.getString("Year","n/a"));
 		setDate += (date.getString("Month","n/a"));
 		setDate += (date.getString("Day","n/a"));
-		setDate +="00"
+		setDate +="00";
 		
 		
 		return setDate;
@@ -98,14 +99,23 @@ public class SetDateActivity extends FragmentActivity {
 
 	public String getEndDate(){
 		String endDate= null;
+		Calendar endCal = Calendar.getInstance();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd00");
 		SharedPreferences date =  getSharedPreferences("date",0);
-		String startDay = (date.getString("Day","n/a"));
-		int mEndDay = (Integer.parseInt(startDay)+7);
-		endDate = (date.getString("Year","n/a"));
+		//String startDay = (date.getString("Day","n/a"));
+		int mEndDay = (Integer.parseInt(date.getString("Day","n/a")));
+		int mEndMonth = (Integer.parseInt(date.getString("Month", "n/a")));
+		int mEndYear = (Integer.parseInt(date.getString("Year", "n/a")));
+		endCal.set(mEndYear, mEndMonth, mEndDay);
+		endCal.add(Calendar.DAY_OF_YEAR, 7);
+		
+		endDate = dateFormat.format(endCal.getTime());
+		
+		/*endDate = (date.getString("Year","n/a"));
 		endDate += (date.getString("Month","n/a"));
 		endDate += Integer.toString(mEndDay);
-		endDate += "00"
-			
+		endDate += "00";
+			*/
 		return endDate;
 }
 		
