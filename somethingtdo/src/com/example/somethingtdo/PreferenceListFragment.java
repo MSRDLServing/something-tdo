@@ -1,16 +1,10 @@
 package com.example.somethingtdo;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.json.JSONException;
-
-//import com.example.somethingtdo.JSONEvent;
-
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.Menu;
@@ -28,6 +22,7 @@ public class PreferenceListFragment extends ListFragment {
 
     private static final String TAG = "PreferenceListFragment";
 
+    public static final String SELECTED_INTEREST = "selectedInterests";
 	
 	private ArrayList<Preference> mPreferences;
 	
@@ -40,6 +35,8 @@ public class PreferenceListFragment extends ListFragment {
         getActivity().setTitle(R.string.app_name);
         mPreferences = PreferenceLab.get(getActivity()).getPreferences();
     
+//        mPreferences = PreferenceLab.get(getActivity()).loadPreferences();
+        
         PreferenceAdapter adapter = new PreferenceAdapter(mPreferences);
         setListAdapter(adapter);
 	}
@@ -104,6 +101,14 @@ public class PreferenceListFragment extends ListFragment {
 	    inflater.inflate(R.menu.preference_options_menu, menu);
 	}
 	
+	public String removeLast(String str) {
+
+	  if (str.length() > 0 && str.charAt(str.length()-1)==',') {
+	    str = str.substring(0, str.length()-1);
+	  }
+	  return str;
+	}
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Preference s;
@@ -121,42 +126,22 @@ public class PreferenceListFragment extends ListFragment {
 	        	    if (s.isChecked()) {
 	        	    	Log.d(TAG, s.getId());
 	        	    	msg += (s.getId() + ",");
+	        	    	
 	        	    }
 	        	}
+	        	msg = removeLast(msg);
 	        	Log.d(TAG, "All selected:" + msg);
 	        	Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
 
-//	            Intent i = new Intent(getActivity(), MapActivity.class);
-//	            i.putExtra(PreferenceFragment.EXTRA_CRIME_ID, .getId());
-//	            startActivityForResult(i, 0)
+	        	PreferenceLab.get(getActivity()).savePreferences();
 	        	
-//	        	JSONEvent je = new JSONEvent();
-	        	
-//        	new JSONEvent().execute("1 Columbus today music,comedy");
-
-/*	        	
-	        System.out.println("!!!Pre try");
-			String data = null;
-			try {
-				data = ((new EventHttpClient()).getEventsData(1, "Columbus", "today", "music,comedy"));
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				System.out.println("!!!Http client");
-				
-				e1.printStackTrace();
-			}
-	        	
-	        	Events events = null;
-			try {
-				events = (new EventParser(data)).getEvents();
-			} catch (JSONException e1) {
-				// TODO Auto-generated catch block
-				System.out.println("!!!Event Parser");
-				e1.printStackTrace();
-			}
-*/
-	        	
-	        	startActivity(new Intent(getActivity(), MapActivity.class));
+	        	PreferenceManager.getDefaultSharedPreferences(getActivity())
+	            .edit()
+	            .putString(SELECTED_INTEREST, msg)
+	            .commit();
+//	            Intent i = new Intent(getActivity(), CrimePagerActivity.class);
+//	            i.putExtra(PreferenceFragment.EXTRA_CRIME_ID, crime.getId());
+//	            startActivityForResult(i, 0);
 	            return true;
 	        case R.id.menu_item_select_all:
 	        	
@@ -185,64 +170,10 @@ public class PreferenceListFragment extends ListFragment {
 	        		checkBox.setChecked(false);
 	        	}
 	        	return true;
-	        case R.id.setdate:
-	        	startActivity(new Intent(getActivity(), SetDateActivity.class));
-	        	return true;
-	        case R.id.setloc:
-	        	startActivity(new Intent(getActivity(), SetLocationActivity.class));
-	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
-	
-	
-/*
-	class JSONEvent extends AsyncTask<String, Integer, Events>  {
-
-
-		private static final String TAG = "JSONEventsTask";
-
-		@Override
-		protected Events doInBackground(String... params) {
-			String data = null;
-			try {
-				data = ((new EventHttpClient()).getEventsData(1, "Columbus", "today", "music,comedy"));
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			Log.d("SUCCESS", data);
-			
-
-//			Log.d("Before Event Parser",null);
-			System.out.println("Before EventParser");
-			Events events = null;
-			try {
-				events = (new EventParser(data)).getEvents();
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-			
-			System.out.println("After EventParser");
-			
-//			System.out.println(events.getEvent(0).toString());
-						
-			return events;
-		}
-		
-		
-	
-		protected void onProgressUpdate(Integer ...progress) {
-			setProgressPercent(progress[0]);
-	    }
-
-	    protected void onPostExecute(Event events) {
-	        // TODO: check this.exception 
-	        // TODO: do something with the feed
-	    }
-
-	}
-*/
 
 
 }
