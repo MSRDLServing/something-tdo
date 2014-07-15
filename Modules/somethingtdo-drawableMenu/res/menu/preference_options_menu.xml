@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/menu_item_choose_interest"
+    android:icon="@android:drawable/ic_menu_save"
+    android:title="@string/add_interest"
+    android:showAsAction="ifRoom|withText"/>
+    
+    <item android:id="@+id/menu_item_select_all"
+    android:icon="@android:drawable/ic_menu_add"
+    android:title="@string/select_all"
+    android:showAsAction="always"/>
+    
+    <item android:id="@+id/menu_item_unselect_all"
+    android:icon="@android:drawable/ic_menu_delete"
+    android:title="@string/unselect_all"
+    android:showAsAction="never"/>
+    
+    <item android:id="@+id/setdate" 
+        android:title="@+string/setdate"></item>
+    
+    <item android:id="@+id/setloc" 
+        android:title="@+string/setloc"></item>
+    
+
+</menu>

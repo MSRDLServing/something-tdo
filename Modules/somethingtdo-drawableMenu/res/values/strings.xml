@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">somethingtdo</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_account">AccountActivity</string>
+    <string name="add_interest">I\'ve chosen my interests</string>
+    <string name="select_all">Select All</string>
+    <string name="unselect_all">Unselect All</string>
+    <string name="title_activity_prefs">PreferenceActivity</string>
+    <string name="title_set_location">SetLocationActivity</string>
+    <string name="title_set_date">SetDateActivity</string>
+    <string name="setdate">Set Date</string>
+    <string name="setloc">Set Location</string>
+    
+
+</resources>
