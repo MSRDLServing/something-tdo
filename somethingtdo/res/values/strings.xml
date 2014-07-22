@@ -15,6 +15,16 @@
     <string name="title_set_date">SetDateActivity</string>
     <string name="setdate">Set Date</string>
     <string name="setloc">Set Location</string>
-    
-
+    <string name="GPSAlertDialogTitle">Error!</string>
+	<string name="GPSAlertDialogMessage">Unable to get current location. Please check your settings.</string>
+	<string name="settings">Settings</string>
+	<string name="cancel">Cancel</string>
+	<string name="event_title_label">Event:</string>
+    <string name="event_detail">Input event details:</string>
+    <string name="choose_contact_text">Choose Contact</string>
+    <string name="send_notify_text">Send Notification</string>
+    <string name="event_date_label">Date:</string>
+    <string name="event_location_label">Address:</string>
+    <string name="event_detail_label">Details:</string>
+    <string name="event_url">Event Website</string>
 </resources>

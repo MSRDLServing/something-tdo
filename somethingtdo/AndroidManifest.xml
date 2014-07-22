@@ -70,6 +70,18 @@
             android:name=".SetDateActivity"
             android:label="@string/title_set_date" >
         </activity>
+                <activity
+            android:name=".ListViewActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".SendNotificationActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".EventDetailActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

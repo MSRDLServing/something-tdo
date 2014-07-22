@@ -20,6 +20,11 @@ public class LoginActivity extends Activity implements OnClickListener {
 	private EditText userNameEditableField;
 	private EditText passwordEditableField;
 	private final static String OPT_NAME = "name";
+	public static String username;
+	public static String password;
+	private final static String USER_NAME = "name";
+	private final static String PASS = "password";
+	static SharedPreferences loginDet = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,20 @@ public class LoginActivity extends Activity implements OnClickListener {
 		
 	}
 	
+	public static String retrieveUsername(){
+		
+		username = loginDet.getString(USER_NAME, "n/a");
+		
+		return username;
+	}
+	
+public static String retrievePassword(){
+		
+		password = loginDet.getString(PASS, "n/a");
+		
+		return password;
+	}
+	
 	private void checkLogin() {
 		String username = this.userNameEditableField.getText().toString();
 		String password = this.passwordEditableField.getText().toString();
@@ -44,14 +63,16 @@ public class LoginActivity extends Activity implements OnClickListener {
 		List<String> names = this.dh.selectAll(username, password);
 		if (names.size() > 0) { // Login successful
 			// Save username as the name of the player
-			SharedPreferences settings = PreferenceManager
+			// Save username as the name of the player
+			loginDet = PreferenceManager
 					.getDefaultSharedPreferences(this);
-			SharedPreferences.Editor editor = settings.edit();
-			editor.putString(OPT_NAME, username);
+			SharedPreferences.Editor editor = loginDet.edit();
+			editor.putString(USER_NAME, username);
+			editor.putString(PASS, password);
 			editor.commit();
 
 			// Bring up the GameOptions screen
-			startActivity(new Intent(this, PreferenceActivity.class));
+			startActivity(new Intent(this, MainActivity.class));
 //			 startActivity(new Intent(this, DummyActivity.class));
 			
 //			  Intent myIntent = new Intent(this, MainActivity.class);

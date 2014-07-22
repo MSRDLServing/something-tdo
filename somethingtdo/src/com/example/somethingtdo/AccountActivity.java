@@ -1,5 +1,7 @@
 package com.example.somethingtdo;
 
+import java.util.Calendar;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.example.somethingtdo.R;
 public class AccountActivity extends Activity implements OnClickListener {
 
@@ -30,6 +33,32 @@ public class AccountActivity extends Activity implements OnClickListener {
 		View btnCancel = (Button) findViewById(R.id.cancel_button);
 		btnCancel.setOnClickListener(this);
 	}
+	
+	private String getTodaysDate(){
+		Calendar c= Calendar.getInstance();
+		int mYear = c.get(Calendar.YEAR);
+		int mMonth = c.get(Calendar.MONTH);
+		int mDay = c.get(Calendar.DAY_OF_MONTH);
+		
+		String mDate = Integer.toString(mMonth)+"/"+Integer.toString(mDay)+"/"+Integer.toString(mYear);
+		
+		return mDate;
+		
+	}
+	
+	public String getCurrentLocation(){
+		
+		GPSTracker gpsTracker = new GPSTracker(this);
+		String mCity = gpsTracker.getLocality(this);
+		return mCity;
+	}
+	
+	protected void createNewProfile(String username){
+		String date= getTodaysDate();
+		String location = getCurrentLocation();
+		this.dh.insert(username, date, location, "none selected");
+		
+	}
 
 	private void CreateAccount() {
 		// this.output = (TextView) this.findViewById(R.id.out_text);
@@ -41,6 +70,7 @@ public class AccountActivity extends Activity implements OnClickListener {
 			this.dh = new DatabaseHelper(this);
 			this.dh.insert(username, password);
 			// this.labResult.setText("Added");
+			createNewProfile(username);
 			Toast.makeText(AccountActivity.this, "new record inserted",
 					Toast.LENGTH_SHORT).show();
 			finish();

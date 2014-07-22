@@ -2,7 +2,9 @@ package com.example.somethingtdo;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ListFragment;
@@ -21,21 +23,28 @@ import android.widget.Toast;
 public class PreferenceListFragment extends ListFragment {
 
     private static final String TAG = "PreferenceListFragment";
+    private static String mInterests;
 
     public static final String SELECTED_INTEREST = "selectedInterests";
 	
 	private ArrayList<Preference> mPreferences;
+	private DatabaseHelper dh;
+	
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
+        Log.d(TAG, "OnCreate PreferenceList");
+        
         setHasOptionsMenu(true); //Notify the OS to create action bar.
         
         getActivity().setTitle(R.string.app_name);
         mPreferences = PreferenceLab.get(getActivity()).getPreferences();
-    
-//        mPreferences = PreferenceLab.get(getActivity()).loadPreferences();
+        
+
+		
+		//mPreferences = PreferenceLab.get(getActivity()).loadPreferences();
         
         PreferenceAdapter adapter = new PreferenceAdapter(mPreferences);
         setListAdapter(adapter);
@@ -139,9 +148,19 @@ public class PreferenceListFragment extends ListFragment {
 	            .edit()
 	            .putString(SELECTED_INTEREST, msg)
 	            .commit();
+	        	
+	        	//INSERT statement
+	        	
+	        	String user = LoginActivity.retrieveUsername();
+	        	this.dh = new DatabaseHelper(getActivity());
+	        	
+	        	String interests = PreferenceLab.get(getActivity()).getInterestsString();
+	        	this.dh.updateInterests(user, interests);
+	        	
 //	            Intent i = new Intent(getActivity(), CrimePagerActivity.class);
 //	            i.putExtra(PreferenceFragment.EXTRA_CRIME_ID, crime.getId());
 //	            startActivityForResult(i, 0);
+//	        	startActivity(new Intent(getActivity(), MapActivity.class));
 	            return true;
 	        case R.id.menu_item_select_all:
 	        	

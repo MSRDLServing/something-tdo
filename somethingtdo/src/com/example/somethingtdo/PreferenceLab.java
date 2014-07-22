@@ -2,6 +2,8 @@ package com.example.somethingtdo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 
 import android.content.Context;
@@ -11,6 +13,8 @@ public class PreferenceLab {
 	
 	private static final String TAG = "PreferenceLab";
     private static final String FILENAME = "preferences.json";
+    private DatabaseHelper dh;
+    private static String mInterests;
 
 	
 	private ArrayList<Preference> mPreferences;
@@ -36,9 +40,17 @@ public class PreferenceLab {
         mPreferences.addAll(Arrays.asList(tempPref));
         
         //Consult the loaded value to set isChecked flag.
-        ArrayList<Preference> loadedList = loadPreferences();
+      //  ArrayList<Preference> loadedList = loadPreferences();
+		String user = LoginActivity.retrieveUsername();
+		this.dh = new DatabaseHelper(mAppContext);
+		List <String> profile = this.dh.searchAndGet(user);
+		
+		mInterests = profile.get(3);
+		
+		Log.d(TAG, "mInterests " + mInterests);
+		
     	Preference s;
-    	int len = loadedList.size();
+/*    	int len = loadedList.size();
     	for (int i = 0; i < len; i++) {
     		s = loadedList.get(i);
     		if (s.isChecked()) {
@@ -46,6 +58,7 @@ public class PreferenceLab {
     			mPreferences.set(i, updatedPreference);
     		}
     	}
+*/
 
     	Log.d(TAG, " after consulting the loaded json file:" + mPreferences.toString());
     }
@@ -55,11 +68,32 @@ public class PreferenceLab {
         if (sPreferenceLab == null) {
             sPreferenceLab = new PreferenceLab(c.getApplicationContext());
         }
+        Log.d(TAG, "Preference Lab created");
         return sPreferenceLab;
     }
     
     public ArrayList<Preference> getPreferences() {
         return mPreferences;
+    }
+    
+    // Add function to convert list to string with comma delimiters
+    
+    public String getInterestsString () {
+    	
+		Preference s;
+    	String msg = "";
+    	Iterator<Preference> e = mPreferences.iterator();
+    	while (e.hasNext())
+    	{
+    	    s = (Preference)e.next();
+    	    if (s.isChecked()) {
+    	    	msg += (s.getId() + ",");
+    	    	
+    	    }
+    	    
+    	   
+    	}
+    	 return msg;
     }
 
     public Preference getPreference(UUID id) {
@@ -73,10 +107,10 @@ public class PreferenceLab {
     public boolean savePreferences() {
         try {
             mSerializer.savePreferences(mPreferences);
-            Log.d(TAG, "crimes saved to file");
+//            Log.d(TAG, "crimes saved to file");
             return true;
         } catch (Exception e) {
-            Log.e(TAG, "Error saving crimes: ", e);
+//            Log.e(TAG, "Error saving crimes: ", e);
             return false;
         }
     }
@@ -84,10 +118,10 @@ public class PreferenceLab {
     public ArrayList<Preference> loadPreferences() {
         try {
         	ArrayList<Preference> preferences = mSerializer.loadPreferences();
-            Log.d(TAG, "preferences loaded from file" + preferences);
+ //           Log.d(TAG, "preferences loaded from file" + preferences);
             return preferences;
         } catch (Exception e) {
-            Log.e(TAG, "Error loading crimes: ", e);
+//            Log.e(TAG, "Error loading crimes: ", e);
             return null;
         }
     }

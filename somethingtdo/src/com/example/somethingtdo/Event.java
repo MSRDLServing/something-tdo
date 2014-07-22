@@ -2,12 +2,17 @@ package com.example.somethingtdo;
 
 import java.util.Date;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Event {
+	String mId;
 	String mTitle;
 	String mVenue;
 	String mStreetAddress;
 	String mVenueUrl;
 	String mEventUrl;
+	
 	String mCity;
 	String mState;
 	String mZipCode;
@@ -16,6 +21,35 @@ public class Event {
 	String mDate; //in ISO 8601 format (e.g. "2005-03-01 19:00:00").
 	String mStartTime; //in ISO 8601 format (e.g. "2005-03-01 19:00:00").
 	String mDescription;
+	
+	private static final String JSON_ID = "id";
+    private static final String JSON_TITLE = "title";
+    private static final String JSON_STARTTIME = "starttime";
+    private static final String JSON_LOCATION = "location";
+    private static final String JSON_DESCRIPTION = "description";
+    private static final String JSON_LONGITUDE = "longitude";
+    private static final String JSON_LATITUDE = "latitude";
+	
+    public JSONObject toJSON() throws JSONException {
+        JSONObject json = new JSONObject();
+        json.put(JSON_ID, mId.toString());
+        json.put(JSON_TITLE, mTitle);
+        json.put(JSON_STARTTIME, mStartTime);
+        json.put(JSON_LOCATION, mStreetAddress);
+        json.put(JSON_DESCRIPTION, mDescription);
+        json.put(JSON_LONGITUDE, mLongitude);
+        json.put(JSON_LATITUDE, mLatitude);
+
+        return json;
+    }
+    
+	public String getId() {
+		return mId;
+	}
+	
+	public void setId(String id) {
+		mId = id;
+	}
 	
 	public String getTitle() {
 		return mTitle;
@@ -69,6 +103,14 @@ public class Event {
 		return mDescription;
 	}
 	
+	public void setLongitude(Float mLongitude) {
+		this.mLongitude = mLongitude;
+	}
+	
+	public void setLatitude(Float mLatitude) {
+		this.mLatitude = mLatitude;
+	}
+	
 	public void setTitle(String mTitle) {
 		this.mTitle = mTitle;
 	}
@@ -99,14 +141,6 @@ public class Event {
 	
 	public void setZipCode(String mZipCode) {
 		this.mZipCode = mZipCode;
-	}
-	
-	public void setLognitude(Float mLongitude) {
-		this.mLongitude = mLongitude;
-	}
-	
-	public void setLatitude(Float mLatitude) {
-		this.mLatitude = mLatitude;
 	}
 	
 	public void setDate(String mDate) {

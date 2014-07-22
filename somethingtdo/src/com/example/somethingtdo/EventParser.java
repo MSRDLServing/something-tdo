@@ -65,7 +65,7 @@ public class EventParser {
 		mEvent.setState(jObj.getString("region_name"));
 		mEvent.setZipCode(jObj.getString("postal_code"));
 		mEvent.setLatitude((float) jObj.getDouble("latitude"));
-		mEvent.setLognitude((float) jObj.getDouble("longitude"));
+		mEvent.setLongitude((float) jObj.getDouble("longitude"));
 		mEvent.setDate(jObj.getString("start_time"));
 		mEvent.setStartTime(jObj.getString("start_time"));
 		mEvent.setDescription(jObj.getString("description"));

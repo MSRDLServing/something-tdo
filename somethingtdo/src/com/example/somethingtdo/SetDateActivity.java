@@ -39,6 +39,7 @@ public class SetDateActivity extends FragmentActivity {
 	int mYear = c.get(Calendar.YEAR);
 	int mMonth = c.get(Calendar.MONTH);
 	int mDay = c.get(Calendar.DAY_OF_MONTH);
+	private DatabaseHelper dh;
 	/*int mDay = 15; 
 	int mMonth = 7; // August, month starts from 0
 	int mYear= 2012;*/
@@ -73,8 +74,15 @@ public class SetDateActivity extends FragmentActivity {
 	date_editor.putString("Day", day);
 	date_editor.putString("Month", month);
 	date_editor.putString("Year", year);
+	String set_date = month+"/"+day+"/"+year;
 	
 	date_editor.commit();
+	
+	//updating in database
+	String user = LoginActivity.retrieveUsername();
+	this.dh = new DatabaseHelper(this);
+	this.dh.updateDate(user,set_date);
+	
 	}
 	
 	public String retrievePreference(){
@@ -89,35 +97,36 @@ public class SetDateActivity extends FragmentActivity {
 		setDate = (date.getString("Year","n/a"));
 		setDate += (date.getString("Month","n/a"));
 		setDate += (date.getString("Day","n/a"));
-		setDate +="00";
+		setDate += "00";
 		
 		
 		return setDate;
 	}
 
-// return 7 days from the date set
+	// return 7 days from the date set
 
-	public String getEndDate(){
-		String endDate= null;
-		Calendar endCal = Calendar.getInstance();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd00");
-		SharedPreferences date =  getSharedPreferences("date",0);
-		//String startDay = (date.getString("Day","n/a"));
-		int mEndDay = (Integer.parseInt(date.getString("Day","n/a")));
-		int mEndMonth = (Integer.parseInt(date.getString("Month", "n/a")));
-		int mEndYear = (Integer.parseInt(date.getString("Year", "n/a")));
-		endCal.set(mEndYear, mEndMonth, mEndDay);
-		endCal.add(Calendar.DAY_OF_YEAR, 7);
-		
-		endDate = dateFormat.format(endCal.getTime());
-		
-		/*endDate = (date.getString("Year","n/a"));
-		endDate += (date.getString("Month","n/a"));
-		endDate += Integer.toString(mEndDay);
-		endDate += "00";
-			*/
-		return endDate;
-}
+		public String getEndDate(){
+			String endDate= null;
+			Calendar endCal = Calendar.getInstance();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd00");
+			SharedPreferences date =  getSharedPreferences("date",0);
+			//String startDay = (date.getString("Day","n/a"));
+			int mEndDay = (Integer.parseInt(date.getString("Day","n/a")));
+			int mEndMonth = (Integer.parseInt(date.getString("Month", "n/a")));
+			int mEndYear = (Integer.parseInt(date.getString("Year", "n/a")));
+			endCal.set(mEndYear, mEndMonth, mEndDay);
+			endCal.add(Calendar.DAY_OF_YEAR, 7);
+			
+			endDate = dateFormat.format(endCal.getTime());
+			
+			/*endDate = (date.getString("Year","n/a"));
+			endDate += (date.getString("Month","n/a"));
+			endDate += Integer.toString(mEndDay);
+			endDate += "00";
+				*/
+			return endDate;
+	}
+			
 		
 
 	@Override

@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 
+import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -26,13 +27,17 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.location.Geocoder;
 
 public class MapActivity extends Activity {
 
 	
+	
 	class CustomInfoWindowAdapter implements InfoWindowAdapter {
+		
 		 
 		@Override
 		public View getInfoContents(Marker marker) {
@@ -83,7 +88,7 @@ public class MapActivity extends Activity {
                         "Sorry! unable to create maps", Toast.LENGTH_SHORT)
                         .show();
             }
-    		new JSONEvent().execute("1 Columbus today music,comedy");
+    		//new JSONEvent().execute("1 Columbus today music,comedy");
 
             googleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter());
             
@@ -91,7 +96,15 @@ public class MapActivity extends Activity {
             googleMap.setMyLocationEnabled(true);
             googleMap.getUiSettings().setMyLocationButtonEnabled(true);
             
-    		new JSONEvent().execute("1 Columbus today music,comedy");
+            
+	    	GPSTracker gpsTracker = new GPSTracker(getApplicationContext());
+	    	String cityName = gpsTracker.getLocality(getApplicationContext());
+	    	
+	    	gpsTracker.getLocation();
+	    	LatLng latlng = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
+	    	googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 11));
+            
+    		new JSONEvent().execute(cityName);
 
 /*
     		double lat = 39.960103547869075;
@@ -134,15 +147,24 @@ public class MapActivity extends Activity {
 	}
 	
 	class JSONEvent extends AsyncTask<String, Integer, Events>  {
+		
+		private EditText mCityName;
 
 
 		private static final String TAG = "JSONEventsTask";
 
 		@Override
 		protected Events doInBackground(String... params) {
+			String pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("selectedInterests", null);
+			System.out.println(pref);
+	    	
+	    	String cityname = params[0];
+	    	
+	    	System.out.println(cityname);
+			
 			String data = null;
 			try {
-				data = ((new EventHttpClient()).getEventsData(1, "Columbus", "today", "music,comedy"));
+				data = ((new EventHttpClient()).getEventsData(3, cityname, "today", pref));
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
@@ -178,9 +200,13 @@ public class MapActivity extends Activity {
 	    	
 	    	//System.out.println("MapsActivity " + mEvents.getEvent(0).toString());
 	    	
-	    	for (int i = 0; i < 10; i++){ 
-	    		Event ev = mEvents.getEvent(i);
-	    		createMarkers(ev.getLatitude(), ev.getLongitude(), ev.getTitle(), ev.getVenue(), BitmapDescriptorFactory.HUE_RED);
+
+	    	
+	    	if (mEvents.getSearchCount() > 1) {
+	    		for (int i = 0; i < 10; i++){ 
+	    			Event ev = mEvents.getEvent(i);
+	    			createMarkers(ev.getLatitude(), ev.getLongitude(), ev.getTitle(), ev.getVenue(), BitmapDescriptorFactory.HUE_RED);
+	    		}
 	    	}
 	    }
 
