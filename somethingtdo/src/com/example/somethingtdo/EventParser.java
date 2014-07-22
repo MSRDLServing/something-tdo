@@ -33,7 +33,6 @@ public class EventParser {
 		}
 		this.mEvents = new Events (resultCount);
 		int pageSize = mData.getInt("page_size");
-//		JSONArray jArr = mData.getJSONArray("events");
 		
 		JSONObject jObjEvents = mData.getJSONObject("events");
 //		System.out.println(jObjEvents.getString("event"));
@@ -41,51 +40,37 @@ public class EventParser {
 
 		if (pageSize <= 1) {
 			JSONObject jObj = jObjEvents.getJSONObject("event");
-			Event mEvent = new Event();
-			mEvent.setTitle(jObj.getString("title"));
-			mEvent.setVenue(jObj.getString("venue_name"));
-			mEvent.setStreetAddress(jObj.getString("venue_address"));
-			mEvent.setVenueUrl(jObj.getString("venue_url"));
-			mEvent.setEventUrl(jObj.getString("url"));
-			mEvent.setCity(jObj.getString("city_name"));
-			mEvent.setState(jObj.getString("region_name"));
-			mEvent.setZipCode(jObj.getString("postal_code"));
-			mEvent.setLatitude((float) jObj.getDouble("latitude"));
-			mEvent.setLognitude((float) jObj.getDouble("longitude"));
-			mEvent.setDate(jObj.getString("start_time"));
-			mEvent.setStartTime(jObj.getString("start_time"));
-			mEvent.setDescription(jObj.getString("description"));
-			this.mEvents.insertEvent(mEvent);
-		}
+			this.mEvents.insertEvent(buildEvent(jObj));
+			}
 		else {		
-		JSONArray jArr = jObjEvents.getJSONArray("event"); //Test for array length?
-		//System.out.println("After");
-		
-		//System.out.println("Middle Parse Data");
-		
-		for (int i =0; i < pageSize; i++) {
-//			System.out.println("For Parse Data"+i);
-			JSONObject jObj = jArr.getJSONObject(i);
-			Event mEvent = new Event();
-			mEvent.setTitle(jObj.getString("title"));
-			mEvent.setVenue(jObj.getString("venue_name"));
-			mEvent.setStreetAddress(jObj.getString("venue_address"));
-			mEvent.setVenueUrl(jObj.getString("venue_url"));
-			mEvent.setEventUrl(jObj.getString("url"));
-			mEvent.setCity(jObj.getString("city_name"));
-			mEvent.setState(jObj.getString("region_name"));
-			mEvent.setZipCode(jObj.getString("postal_code"));
-			mEvent.setLatitude((float) jObj.getDouble("latitude"));
-			mEvent.setLognitude((float) jObj.getDouble("longitude"));
-			mEvent.setDate(jObj.getString("start_time"));
-			mEvent.setStartTime(jObj.getString("start_time"));
-			mEvent.setDescription(jObj.getString("description"));
-			this.mEvents.insertEvent(mEvent);
-			Log.d("EventParser", mEvent.toString());
+			JSONArray jArr = jObjEvents.getJSONArray("event"); 
+			//System.out.println("After");			
+			//System.out.println("Middle Parse Data");
+			
+			for (int i =0; i < pageSize; i++) {
+				//System.out.println("For Parse Data"+i);
+				JSONObject jObj = jArr.getJSONObject(i);
+				this.mEvents.insertEvent(buildEvent(jObj));
+			}
 		}
-		}
-		
-
+	}
+	private Event buildEvent (JSONObject jObj) throws JSONException {
+		Event mEvent = new Event();
+		mEvent.setTitle(jObj.getString("title"));
+		mEvent.setVenue(jObj.getString("venue_name"));
+		mEvent.setStreetAddress(jObj.getString("venue_address"));
+		mEvent.setVenueUrl(jObj.getString("venue_url"));
+		mEvent.setEventUrl(jObj.getString("url"));
+		mEvent.setCity(jObj.getString("city_name"));
+		mEvent.setState(jObj.getString("region_name"));
+		mEvent.setZipCode(jObj.getString("postal_code"));
+		mEvent.setLatitude((float) jObj.getDouble("latitude"));
+		mEvent.setLognitude((float) jObj.getDouble("longitude"));
+		mEvent.setDate(jObj.getString("start_time"));
+		mEvent.setStartTime(jObj.getString("start_time"));
+		mEvent.setDescription(jObj.getString("description"));
+		Log.d("EventParser", mEvent.toString());
+		return mEvent;
 	}
 
 	public Events getEvents() {
