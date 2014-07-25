@@ -171,7 +171,7 @@ public class SetDateActivity extends FragmentActivity {
 				FragmentTransaction ft = fm.beginTransaction();
 				
 				/** Adding the fragment object to the fragment transaction */
-				ft.add(datePicker, "date_picker");
+				ft.add(datePicker, DatePickerDialogFragment.TAG);
 				
 				/** Opening the DatePicker fragment */
 				ft.commit();

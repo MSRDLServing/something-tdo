@@ -37,7 +37,7 @@ public class PreferenceLab {
 	          new Preference("Literary","books"), new Preference("Food","food"), new Preference("Festivals","festivals_parades")
         };
         
-        mPreferences.addAll(Arrays.asList(tempPref));
+      
         
         //Consult the loaded value to set isChecked flag.
       //  ArrayList<Preference> loadedList = loadPreferences();
@@ -47,27 +47,38 @@ public class PreferenceLab {
 		
 		mInterests = profile.get(3);
 		
-		Log.d(TAG, "mInterests " + mInterests);
+		Log.d(TAG, "mInterests " + mInterests + "for user " + user);
+		
+		String[] interestsArr = mInterests.split(",");
+		
+		Log.d(TAG, interestsArr[0]);
 		
     	Preference s;
-/*    	int len = loadedList.size();
+    	int len = interestsArr.length;
     	for (int i = 0; i < len; i++) {
-    		s = loadedList.get(i);
-    		if (s.isChecked()) {
-    			Preference updatedPreference = new Preference(s.getName(), s.getId(), true);
-    			mPreferences.set(i, updatedPreference);
+    		
+    		Log.d(TAG, interestsArr[i]);
+    		for (int j = 0; j < tempPref.length; j++){
+    			
+    			if (interestsArr[i].equals(tempPref[j].getId())) {
+    				
+    				Log.d(TAG, "Match Found");
+    				tempPref[j].setChecked(true);
+    			}
     		}
+
     	}
-*/
+    	
+    	mPreferences.addAll(Arrays.asList(tempPref));
 
     	Log.d(TAG, " after consulting the loaded json file:" + mPreferences.toString());
     }
 
     public static PreferenceLab get(Context c) {
     	
-        if (sPreferenceLab == null) {
-            sPreferenceLab = new PreferenceLab(c.getApplicationContext());
-        }
+        //if (sPreferenceLab == null) {
+        	sPreferenceLab = new PreferenceLab(c.getApplicationContext());
+        //}
         Log.d(TAG, "Preference Lab created");
         return sPreferenceLab;
     }

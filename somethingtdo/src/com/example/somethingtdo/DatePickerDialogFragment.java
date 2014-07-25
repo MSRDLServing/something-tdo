@@ -15,6 +15,8 @@ public class DatePickerDialogFragment extends DialogFragment {
 	int mMonth;
 	int mYear;
 	
+	public static final String TAG = "data_picker";
+	
 	public DatePickerDialogFragment(Handler h){
 		/** Getting the reference to the message handler instantiated in MainActivity class */
 		mHandler = h;
@@ -71,6 +73,15 @@ public class DatePickerDialogFragment extends DialogFragment {
 		
         /** Opening the DatePickerDialog window */
 		return new DatePickerDialog(getActivity(), listener, mYear, mMonth, mDay);
-    }	
+    }
+	
+	public boolean isShown() {
+		if (getDialog() == null) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 
 }
