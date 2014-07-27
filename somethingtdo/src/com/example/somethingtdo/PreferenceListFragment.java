@@ -1,9 +1,11 @@
 package com.example.somethingtdo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -29,6 +31,10 @@ public class PreferenceListFragment extends ListFragment {
 	
 	private ArrayList<Preference> mPreferences;
 	private DatabaseHelper dh;
+	private Context mAppContext;
+	
+	private static final String FILENAME = "preferences.json";
+	private PreferenceIntentJSONSerializer mSerializer;
 	
 	
 	@Override
@@ -155,7 +161,15 @@ public class PreferenceListFragment extends ListFragment {
 	        	this.dh = new DatabaseHelper(getActivity());
 	        	
 	        	String interests = PreferenceLab.get(getActivity()).getInterestsString();
+	        	
+	        	Log.d(TAG, "tnterests string " + interests);
+	        	
 	        	this.dh.updateInterests(user, interests);
+	        	
+	        	List <String> profile = this.dh.searchAndGet(user);
+	    		mInterests = profile.get(3);
+	    		
+	    		Log.d(TAG, "mInterests " + mInterests + "for user " + user);
 	        	
 //	            Intent i = new Intent(getActivity(), CrimePagerActivity.class);
 //	            i.putExtra(PreferenceFragment.EXTRA_CRIME_ID, crime.getId());
@@ -194,5 +208,59 @@ public class PreferenceListFragment extends ListFragment {
 	    }
 	}
 
+/*
+	@Override
+	public void onResume()
+	{
+		  super.onResume();
+//        mAppContext = getApplicationContext();
+        
+        mPreferences = new ArrayList<Preference>();  
+        mSerializer = new PreferenceIntentJSONSerializer(mAppContext, FILENAME);
 
+        Preference[] tempPref = 
+        		new Preference[] {
+    		  new Preference("Concert","music"), new Preference("Comedy","comedy"), new Preference("Performing Arts","performing_arts"), 
+	          new Preference("Sports","sports"), new Preference("Film","movies-film"), new Preference("Galleries","art"), 
+	          new Preference("Literary","books"), new Preference("Food","food"), new Preference("Festivals","festivals_parades")
+        };
+        
+      
+        
+        //Consult the loaded value to set isChecked flag.
+      //  ArrayList<Preference> loadedList = loadPreferences();
+		String user = LoginActivity.retrieveUsername();
+		this.dh = new DatabaseHelper(mAppContext);
+		List <String> profile = this.dh.searchAndGet(user);
+		
+		mInterests = profile.get(3);
+		
+		Log.d(TAG, "mInterests " + mInterests + "for user " + user);
+		
+		String[] interestsArr = mInterests.split(",");
+		
+		Log.d(TAG, interestsArr[0]);
+		
+    	Preference s;
+    	int len = interestsArr.length;
+    	for (int i = 0; i < len; i++) {
+    		
+    		Log.d(TAG, interestsArr[i]);
+    		for (int j = 0; j < tempPref.length; j++){
+    			
+    			if (interestsArr[i].equals(tempPref[j].getId())) {
+    				
+    				Log.d(TAG, "Match Found");
+    				tempPref[j].setChecked(true);
+    			}
+    		}
+
+    	}
+    	
+    	mPreferences.addAll(Arrays.asList(tempPref));
+
+    	Log.d(TAG, " after consulting the loaded json file:" + mPreferences.toString());
+		
+	}
+*/
 }

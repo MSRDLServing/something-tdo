@@ -13,6 +13,7 @@
     <string name="title_activity_prefs">PreferenceActivity</string>
     <string name="title_set_location">SetLocationActivity</string>
     <string name="title_set_date">SetDateActivity</string>
+    <string name="profile_activity">ProfileActivity</string>
     <string name="setdate">Set Date</string>
     <string name="setloc">Set Location</string>
     <string name="GPSAlertDialogTitle">Error!</string>

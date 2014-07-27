@@ -76,9 +76,9 @@ public class PreferenceLab {
 
     public static PreferenceLab get(Context c) {
     	
-        //if (sPreferenceLab == null) {
+        if (sPreferenceLab == null) {
         	sPreferenceLab = new PreferenceLab(c.getApplicationContext());
-        //}
+        }
         Log.d(TAG, "Preference Lab created");
         return sPreferenceLab;
     }
