@@ -27,7 +27,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	private static final String TAG = "MAINACTIVITY";
 	
 	private static final String[] ITEMS =
-        {"Open Map", "Open List", "Profile", "Set Date", "Set Location"};
+        {"Open Map", "Open List", "Set Preferences", "View Profile", "Set Date", "Set Location"};
     private static final int[] COLORS =
         {Color.WHITE, Color.RED, Color.GREEN, Color.BLUE};
      
@@ -183,19 +183,26 @@ public class MainActivity extends Activity implements OnItemClickListener {
     	
     	if (position == 2) { //Settings
     		
+    		Intent i = new Intent(this, PreferenceActivity.class);
+    		startActivity(i);
+    		
+    	}
+    	
+    	if (position == 3) { //Settings
+    		
     		Intent i = new Intent(this, ProfileActivity.class);
     		startActivity(i);
     		
     	}
     	
-    	if (position == 3) {  //Settings
+    	if (position == 4) {  //Settings
     		
     		Intent i = new Intent(this, SetDateActivity.class);
     		startActivity(i);
     		
     	}
     	
-    	if (position == 4) { //Settings
+    	if (position == 5) { //Settings
     		
     		Intent i = new Intent(this, SetLocationActivity.class);
     		startActivity(i);

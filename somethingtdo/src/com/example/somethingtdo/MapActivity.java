@@ -106,8 +106,10 @@ public class MapActivity extends Activity {
 			this.dh = new DatabaseHelper(this);
 			
 			String cityName;
+			String time;
 			
     		cityName = this.dh.searchAndGet(user).get(2);
+    		time = this.dh.searchAndGet(user).get(1);
     		
     		Log.d("Map", cityName);
 	    	
@@ -115,7 +117,7 @@ public class MapActivity extends Activity {
 	    	LatLng latlng = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
 	    	googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 11));
             
-    		new JSONEvent().execute(cityName);
+    		new JSONEvent().execute(cityName,time);
 
         }
 	}
@@ -146,12 +148,13 @@ public class MapActivity extends Activity {
 			System.out.println(pref);
 	    	
 	    	String cityname = params[0];
+	    	String time = params[1];
 	    	
 	    	System.out.println(cityname);
 			
 			String data = null;
 			try {
-				data = ((new EventHttpClient()).getEventsData(1, cityname, "today", pref));
+				data = ((new EventHttpClient()).getEventsData(1, cityname, time, pref));
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
