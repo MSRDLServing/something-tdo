@@ -1,18 +1,33 @@
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
-
-    tools:context="com.example.somethingtdo.SplashScreenActivity">
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/container"
+            android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:src="@drawable/somethingtdosplash" />
+            android:layout_margin="10dp"
+            android:background="@color/custom_theme_color"
+            android:orientation="vertical"
+            tools:context="com.example.somethingtdo.SplashScreenActivity" >
+
+        android:gravity="center_horizontal"
+        
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/custom_theme_text"
+                android:textSize="@dimen/large_logo_size"
+                android:textStyle="bold"
+                android:typeface="sans" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="We\&apos;re here to help you find something to do!"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/custom_theme_text" />
 
     </LinearLayout>
 
