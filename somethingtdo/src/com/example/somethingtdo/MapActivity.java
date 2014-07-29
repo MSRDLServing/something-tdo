@@ -1,6 +1,7 @@
 package com.example.somethingtdo;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.json.JSONException;
 
@@ -34,7 +35,8 @@ import android.location.Geocoder;
 
 public class MapActivity extends Activity {
 
-	
+	private String mLoc;
+	private DatabaseHelper dh;
 	
 	class CustomInfoWindowAdapter implements InfoWindowAdapter {
 		
@@ -98,37 +100,22 @@ public class MapActivity extends Activity {
             
             
 	    	GPSTracker gpsTracker = new GPSTracker(getApplicationContext());
-	    	String cityName = gpsTracker.getLocality(getApplicationContext());
+//	    	String cityName = gpsTracker.getLocality(getApplicationContext());
+	    	
+			String user = LoginActivity.retrieveUsername();
+			this.dh = new DatabaseHelper(this);
+			
+			String cityName;
+			
+    		cityName = this.dh.searchAndGet(user).get(2);
+    		
+    		Log.d("Map", cityName);
 	    	
 	    	gpsTracker.getLocation();
 	    	LatLng latlng = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
 	    	googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 11));
             
     		new JSONEvent().execute(cityName);
-
-/*
-    		double lat = 39.960103547869075;
-    		double lon = -82.99892485141754;
-    		String title = "Sample Symphony";
-    		String snippet = "\nTime: 7:30 PM 15 July 2014\n " +
-					"Location: The Ohio Theater\n" +
-					"Address: 39 East State Street, Columbus, OH, 43215\n" +
-					"Category: Live Music\n\n" +
-					"A very nice Sample Sympony";
-            
-            createMarkers(lat, lon, title, snippet, BitmapDescriptorFactory.HUE_RED);
-            
-    		double lat2 = 39.987312;
-    		double lon2 = -83.00459699999999;
-    		String title2 = "Local Band Event";
-    		String snippet2 = "\nTime: 10:00 PM 12 July 2014\n " +
-					"Location: Brothers Drake Meadery and Bar\n" +
-					"Address: 226 E 5th Ave, Columbus, OH 43201\n" +
-					"Category: Live Music\n\n" +
-					"A Local Band";            
-            
-            createMarkers(lat2, lon2, title2, snippet2, BitmapDescriptorFactory.HUE_GREEN);
-*/
 
         }
 	}
@@ -164,7 +151,7 @@ public class MapActivity extends Activity {
 			
 			String data = null;
 			try {
-				data = ((new EventHttpClient()).getEventsData(3, cityname, "today", pref));
+				data = ((new EventHttpClient()).getEventsData(1, cityname, "today", pref));
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}

@@ -3,6 +3,7 @@ package com.example.somethingtdo;
 import java.util.List;
 
 import com.example.somethingtdo.R;
+
 import android.app.Activity;
 //import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.location.Geocoder;
 //import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 //import android.util.Log;
 //import android.view.Menu;
 import android.view.View;
@@ -20,6 +22,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 
 //import com.google.android.maps.*;
 import com.google.android.gms.maps.model.LatLng;
@@ -32,6 +35,7 @@ public class SetLocationActivity extends Activity implements OnClickListener {
 	private Button mSetLocation;
 	private EditText mCityName;
 	private LatLng latlng;
+	private String mLoc;
 	//boolean isGPSEnabled= false;
 	//boolean isNetworkEnabled= false;
 	//boolean canGetLocation= false;
@@ -123,6 +127,11 @@ public class SetLocationActivity extends Activity implements OnClickListener {
 				String user = LoginActivity.retrieveUsername();
 				this.dh = new DatabaseHelper(this);
 				this.dh.updateLocation(user,locationName);
+				
+	        	List <String> profile = this.dh.searchAndGet(user);
+	    		mLoc = profile.get(3);
+	    		
+	    		Log.d("SetLocation", "mLoc " + mLoc + "for user " + user);
 				
 				Toast.makeText(getApplicationContext(),"The loaction set is "+ mCityName.getText()+ latlng.toString(),Toast.LENGTH_LONG).show();
 			}

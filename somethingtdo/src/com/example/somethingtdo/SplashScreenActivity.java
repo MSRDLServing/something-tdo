@@ -3,8 +3,10 @@ package com.example.somethingtdo;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
+import android.view.Window;
 import android.os.Bundle;
 import android.view.MotionEvent;
+
 import com.example.somethingtdo.R;
 
 public class SplashScreenActivity extends Activity {
@@ -17,6 +19,7 @@ public class SplashScreenActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash_screen);
 
       /*  if (savedInstanceState == null) {

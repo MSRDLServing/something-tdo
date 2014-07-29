@@ -18,6 +18,7 @@ import android.widget.TextView;
 public class ListViewFragment extends ListFragment {
 
     private static final String TAG = "ListViewFragment";
+    private DatabaseHelper dh;
 
 	private ArrayList<Event> mEvents;
 	EventLab mEventLab;
@@ -29,8 +30,16 @@ public class ListViewFragment extends ListFragment {
         getActivity().setTitle(R.string.app_name);
         
         mEventLab = EventLab.get(getActivity());
+        
+//		String user = LoginActivity.retrieveUsername();
+//		this.dh = new DatabaseHelper(this);
+		
+		String cityName;
+		
+//		cityName = this.dh.searchAndGet(user).get(2);
 
         new FetchItemsTask().execute();
+//      new FetchItemsTask().execute(cityname);
     
 //        mEvents = EventLab.get(getActivity()).loadEvents();
 	}
@@ -105,6 +114,10 @@ public class ListViewFragment extends ListFragment {
 //        	new EventFetcher(mEventLab).fetchItems();
         	String filter = PreferenceManager.getDefaultSharedPreferences(getActivity())
         					.getString(PreferenceListFragment.SELECTED_INTEREST, null);
+        	
+//        	String cityname = params[0].toString();
+        	
+        	
         	ArrayList<Event> mEvents = new EventFetcher(mEventLab).getEventsData(1, "Columbus", "This Week", filter);
 //        	try {
 //        		String data = (new EventHttpClient()).getTestData();
