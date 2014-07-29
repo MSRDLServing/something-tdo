@@ -36,11 +36,13 @@ public class ListViewFragment extends ListFragment {
 		
 		String cityName;
 		String time;
+		String prefs;
 		
 		cityName = this.dh.searchAndGet(user).get(2);
 		time = this.dh.searchAndGet(user).get(1);
+		prefs = this.dh.searchAndGet(user).get(3);
 
-      new FetchItemsTask().execute(cityName, time);
+      new FetchItemsTask().execute(cityName, time, prefs);
     
 	}
 	
@@ -114,9 +116,10 @@ public class ListViewFragment extends ListFragment {
         	
         	String cityname = params[0];
         	String time = params[1];
+        	String prefs = params[2];
         	
         	
-        	ArrayList<Event> mEvents = new EventFetcher(mEventLab).getEventsData(1, cityname, "This Week", filter);
+        	ArrayList<Event> mEvents = new EventFetcher(mEventLab).getEventsData(1, cityname, "This Week", prefs);
         	
             return mEvents;
         }
