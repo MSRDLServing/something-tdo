@@ -195,7 +195,11 @@ public class MapActivity extends Activity {
 	    	if (mEvents.getSearchCount() > 1) {
 	    		for (int i = 0; i < 10; i++){ 
 	    			Event ev = mEvents.getEvent(i);
-	    			createMarkers(ev.getLatitude(), ev.getLongitude(), ev.getTitle(), ev.getVenue(), BitmapDescriptorFactory.HUE_RED);
+	    			createMarkers(ev.getLatitude(), 
+	    					ev.getLongitude(), 
+	    					ev.getTitle(), 
+	    					ev.getVenue() + "\n" +  ev.getStreetAddress() + "\n" + ev.getStartTime(),
+	    					BitmapDescriptorFactory.HUE_RED);
 	    		}
 	    	}
 	    }
