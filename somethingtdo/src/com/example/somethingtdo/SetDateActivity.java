@@ -78,6 +78,8 @@ public class SetDateActivity extends FragmentActivity {
 	
 	date_editor.commit();
 	
+	String date = retrievePreference();
+	
 	//updating in database
 	String user = LoginActivity.retrieveUsername();
 	this.dh = new DatabaseHelper(this);

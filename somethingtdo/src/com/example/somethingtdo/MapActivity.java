@@ -112,6 +112,7 @@ public class MapActivity extends Activity {
     		time = this.dh.searchAndGet(user).get(1);
     		
     		Log.d("Map", cityName);
+			Log.d("Map", time);
 	    	
 	    	gpsTracker.getLocation();
 	    	LatLng latlng = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
@@ -190,7 +191,6 @@ public class MapActivity extends Activity {
 	    	
 	    	//System.out.println("MapsActivity " + mEvents.getEvent(0).toString());
 	    	
-
 	    	
 	    	if (mEvents.getSearchCount() > 1) {
 	    		for (int i = 0; i < 10; i++){ 

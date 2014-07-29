@@ -121,7 +121,7 @@ public class ListViewFragment extends ListFragment {
         	String time = params[1];
         	
         	
-        	ArrayList<Event> mEvents = new EventFetcher(mEventLab).getEventsData(1, cityname, time, filter);
+        	ArrayList<Event> mEvents = new EventFetcher(mEventLab).getEventsData(1, cityname, "This Week", filter);
 //        	try {
 //        		String data = (new EventHttpClient()).getTestData();
 //        		Log.d(TAG, "retrieved data:" + data);
