@@ -8,18 +8,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onPickInterestClick"
+        android:textColor="@color/custom_theme_text"
         android:text="@string/add_interest" />
     
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onSelectAllClick"
+        android:textColor="@color/custom_theme_text"
         android:text="@string/select_all" />
     
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onUnselectAllClick"
+        android:textColor="@color/custom_theme_text"
         android:text="@string/unselect_all" />
     
     <ListView

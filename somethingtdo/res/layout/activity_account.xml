@@ -19,6 +19,7 @@
                 android:layout_gravity="center"
             	android:layout_marginBottom="15dip"
             	android:text="Create New Account"
+            	android:textColor="@color/custom_theme_text"
             	android:textSize="20.5sp" />
 
             <TextView
@@ -27,6 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:text="Username"
+                android:textColor="@color/custom_theme_text"
                 android:textSize="15.5sp" />
 
             <EditText
@@ -46,6 +48,7 @@
                 android:layout_height="wrap_content"
                  android:layout_gravity="left"
                  android:textSize="15.5sp"
+                 android:textColor="@color/custom_theme_text"
                 android:text="Password" />
 
             <EditText
@@ -61,6 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
+                android:textColor="@color/custom_theme_text"
                 android:textSize="15.5sp"
                 android:text="Confirm Password" />
 
@@ -76,12 +80,14 @@
                 android:id="@+id/done_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/custom_theme_text"
                 android:text="Sign Up" />
 
             <Button
                 android:id="@+id/cancel_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/custom_theme_text"
                 android:text="Cancel" />
 
         </LinearLayout>
