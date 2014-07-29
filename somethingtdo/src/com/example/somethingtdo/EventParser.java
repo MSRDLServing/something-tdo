@@ -6,8 +6,6 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-//import com.example.something_tdo;
-
 public class EventParser {
 	Events mEvents;
 	JSONObject mData;
@@ -17,12 +15,6 @@ public class EventParser {
 		parseData();
 	}
 	
-// implement latter
-//	public EventParser(String data, Events eventArray) throws JSONException {
-//		mData = new JSONObject(data);
-//		parseData();
-//	}
-
 	private void parseData() throws JSONException {
 		int resultCount = mData.getInt("total_items");
 		System.out.println("Top Parse Data" + resultCount);
@@ -35,8 +27,6 @@ public class EventParser {
 		int pageSize = mData.getInt("page_size");
 		
 		JSONObject jObjEvents = mData.getJSONObject("events");
-//		System.out.println(jObjEvents.getString("event"));
-//		System.out.println("Between");
 
 		if (pageSize <= 1) {
 			JSONObject jObj = jObjEvents.getJSONObject("event");
@@ -44,11 +34,8 @@ public class EventParser {
 			}
 		else {		
 			JSONArray jArr = jObjEvents.getJSONArray("event"); 
-			//System.out.println("After");			
-			//System.out.println("Middle Parse Data");
 			
 			for (int i =0; i < pageSize; i++) {
-				//System.out.println("For Parse Data"+i);
 				JSONObject jObj = jArr.getJSONObject(i);
 				this.mEvents.insertEvent(buildEvent(jObj));
 			}

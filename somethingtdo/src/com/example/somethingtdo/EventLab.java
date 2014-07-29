@@ -6,7 +6,6 @@ import android.content.Context;
 import android.util.Log;
 
 public class EventLab {
-	private static final String TAG = "EventLab";
     private static final String FILENAME = "event_columbus.xml";
     
     private ArrayList<Event> mEvents;
@@ -32,14 +31,4 @@ public class EventLab {
     public EventIntentSerializer getSerializer() {
 		return mSerializer;
 	}
-    
-//    public Event getEvent(String id) {
-//    	Log.d(TAG, " all events:" + mEvents.toString());
-//        for (Event c : mEvents) { //Why does mEvents have all loaded events here?
-//            if (c.getId().equals(id))
-//                return c;
-//        }
-//        return null;
-//    }
-    
 }

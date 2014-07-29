@@ -65,13 +65,6 @@ public class EventIntentSerializer {
                 // Line breaks are omitted and irrelevant
                 out.append(line);
             }
-//            // Parse the JSON using JSONTokener
-//            JSONArray array = (JSONArray) new JSONTokener(xmlString.toString())
-//                .nextValue();
-//            // Build the array of Events from JSONObjects
-//            for (int i = 0; i < array.length(); i++) {
-//                Events.add(new Event(array.getJSONObject(i)));
-//            }
             xmlString = out.toString().getBytes();
         } catch (FileNotFoundException e) {
             // Ignore this one; it happens when starting fresh
@@ -80,7 +73,6 @@ public class EventIntentSerializer {
             if (reader != null)
                 reader.close();
         }
-//        return Events;
         return xmlString;
     }
 

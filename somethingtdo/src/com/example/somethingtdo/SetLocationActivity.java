@@ -31,28 +31,13 @@ public class SetLocationActivity extends Activity implements OnClickListener {
 	
 	SharedPreferences slocation = null;
 	
-	//private final Context mContext;
 	private Button mSetLocation;
 	private EditText mCityName;
 	private LatLng latlng;
 	private String mLoc;
-	//boolean isGPSEnabled= false;
-	//boolean isNetworkEnabled= false;
-	//boolean canGetLocation= false;
-	//Location location;
 	double latitude;
 	double longitude;
 	private DatabaseHelper dh;
-	//private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 2;
-	//private static final long MIN_TIME_BW_UPDATES = 1000 * 30 * 1;
-	//protected LocationManager locationManager;
-	//GPSTracker gpsTracker = new GPSTracker(this);
-	
-/*public SetLocationActivity(Context context) {
-        this.mContext = context;
-        //latlng = getLocation();
-    }*/
-	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,14 +61,8 @@ public class SetLocationActivity extends Activity implements OnClickListener {
 		else{
 			gpsTracker.showSettingsAlert();
 		}
-		/*if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}*/
 		
 		mSetLocation = (Button)findViewById(R.id.button1);
-		
-		//latlng = getLocation();
 		
 		mSetLocation.setOnClickListener(this);
 	}
@@ -98,7 +77,6 @@ public class SetLocationActivity extends Activity implements OnClickListener {
 	
 	public LatLng retrievePreference(){
 		LatLng slatlong= null;
-//		SharedPreferences date = getSharedPreferences("date",0);
 		latitude = (slocation.getLong("lat",0));
 		longitude = (slocation.getLong("lat",0));
 		 slatlong= new LatLng(latitude,longitude);	 
@@ -141,46 +119,4 @@ public class SetLocationActivity extends Activity implements OnClickListener {
 			}
 		}
 	}
-	
-	
-/*	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.set_location, menu);
-		return true;
-	}*/
-
-	
-	
-
-	/*@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}*/
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	/*public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_set_location,
-					container, false);
-			return rootView;
-		}
-	}*/
-
 }

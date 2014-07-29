@@ -40,18 +40,13 @@ public class PreferenceLab {
       
         
         //Consult the loaded value to set isChecked flag.
-      //  ArrayList<Preference> loadedList = loadPreferences();
 		String user = LoginActivity.retrieveUsername();
 		this.dh = new DatabaseHelper(mAppContext);
 		List <String> profile = this.dh.searchAndGet(user);
 		
 		mInterests = profile.get(3);
 		
-		Log.d(TAG, "mInterests " + mInterests + "for user " + user);
-		
 		String[] interestsArr = mInterests.split(",");
-		
-		Log.d(TAG, interestsArr[0]);
 		
     	Preference s;
     	int len = interestsArr.length;
@@ -88,7 +83,6 @@ public class PreferenceLab {
     }
     
     // Add function to convert list to string with comma delimiters
-    
     public String getInterestsString () {
     	
 		Preference s;
@@ -118,10 +112,10 @@ public class PreferenceLab {
     public boolean savePreferences() {
         try {
             mSerializer.savePreferences(mPreferences);
-//            Log.d(TAG, "crimes saved to file");
+            Log.d(TAG, "crimes saved to file");
             return true;
         } catch (Exception e) {
-//            Log.e(TAG, "Error saving crimes: ", e);
+            Log.e(TAG, "Error saving crimes: ", e);
             return false;
         }
     }
@@ -129,10 +123,10 @@ public class PreferenceLab {
     public ArrayList<Preference> loadPreferences() {
         try {
         	ArrayList<Preference> preferences = mSerializer.loadPreferences();
- //           Log.d(TAG, "preferences loaded from file" + preferences);
+            Log.d(TAG, "preferences loaded from file" + preferences);
             return preferences;
         } catch (Exception e) {
-//            Log.e(TAG, "Error loading crimes: ", e);
+            Log.e(TAG, "Error loading crimes: ", e);
             return null;
         }
     }

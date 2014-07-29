@@ -40,10 +40,8 @@ public class ListViewFragment extends ListFragment {
 		cityName = this.dh.searchAndGet(user).get(2);
 		time = this.dh.searchAndGet(user).get(1);
 
-//        new FetchItemsTask().execute();
       new FetchItemsTask().execute(cityName, time);
     
-//        mEvents = EventLab.get(getActivity()).loadEvents();
 	}
 	
 	@Override
@@ -100,8 +98,6 @@ public class ListViewFragment extends ListFragment {
 				@Override
 				public void onClick(View v) {
 		            Intent i = new Intent(getActivity(), SendNotificationActivity.class);
-//		            i.putExtra(PreferenceFragment.EXTRA_CRIME_ID, crime.getId());
-//		            startActivityForResult(i, 0);
 		            startActivity(i);
 				}
 			});
@@ -113,7 +109,6 @@ public class ListViewFragment extends ListFragment {
     private class FetchItemsTask extends AsyncTask<String,Void,ArrayList<Event>> {
         @Override
         protected ArrayList<Event> doInBackground(String... params) {
-//        	new EventFetcher(mEventLab).fetchItems();
         	String filter = PreferenceManager.getDefaultSharedPreferences(getActivity())
         					.getString(PreferenceListFragment.SELECTED_INTEREST, null);
         	
@@ -122,12 +117,6 @@ public class ListViewFragment extends ListFragment {
         	
         	
         	ArrayList<Event> mEvents = new EventFetcher(mEventLab).getEventsData(1, cityname, "This Week", filter);
-//        	try {
-//        		String data = (new EventHttpClient()).getTestData();
-//        		Log.d(TAG, "retrieved data:" + data);
-//        	} catch (IOException e) {
-//        		Log.e(TAG, " IO exception!");
-//        	}
         	
             return mEvents;
         }

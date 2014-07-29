@@ -102,16 +102,13 @@ public class EventFetcher{
                     .appendQueryParameter(PARAM_FILTER, filter)
                     .appendQueryParameter(PARAM_DATE, date)
                     .build().toString();
-//            String url = "http://api.eventful.com/rest/events/search?app_key=m6Wj5dR94NQ5jhs5&location=Columbus";
             String xmlString = getUrl(url);
-            Log.i(TAG, "Received xml: " + xmlString);
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             XmlPullParser parser = factory.newPullParser();
             parser.setInput(new StringReader(xmlString));
 
             loadXML(items, parser);
             
-            Log.d(TAG, " parsed data:" + items.toString());
         } catch (IOException ioe) {
             Log.e(TAG, "Failed to fetch items", ioe);
         } catch (XmlPullParserException xppe) {
@@ -137,7 +134,6 @@ public class EventFetcher{
         	Event item = new Event();
         	String id = xpp.getAttributeValue(null, "id");
         	item.setId(id);
-        	Log.d(TAG, " added id:" + id);
         	eventType = xpp.next();
              
             while ( eventType != XmlPullParser.END_TAG || !XML_EVENT_TAG.equals(xpp.getName()) ) {
@@ -161,43 +157,37 @@ public class EventFetcher{
 	        	if (eventType == XmlPullParser.TEXT) {
 	        		item.setTitle(xpp.getText());
 	        	}
-	            Log.d(TAG, " Added title:" + xpp.getText());
 	        } else if (xpp.getName().equals(START_DATE_TAG)) {
 	        	eventType = xpp.next();
 	        	if (eventType == XmlPullParser.TEXT) {
 	        		item.setStartTime(xpp.getText());
 	        	}
-	            Log.d(TAG, " Added start time:" + xpp.getText());
 	        } else if (xpp.getName().equals(LOCATION_TAG)) {
 	        	eventType = xpp.next();
 	        	if (eventType == XmlPullParser.TEXT) {
 	        		item.setStreetAddress(xpp.getText());
 	        	}
-	            Log.d(TAG, " Added location:" + xpp.getText());
 	        } else if (xpp.getName().equals(DESCRIPTION_TAG)) {
 	        	eventType = xpp.next();
 	        	if (eventType == XmlPullParser.TEXT) {
 	        		item.setDescription(xpp.getText());
 	        	}
-	            Log.d(TAG, " Added desc:" + xpp.getText());
 	        } else if (xpp.getName().equals(LONGITUDE_TAG)) {
 	        	eventType = xpp.next();
 	        	if (eventType == XmlPullParser.TEXT) {
 	        		item.setLongitude(Float.parseFloat(xpp.getText()));
 	        	}
-	            Log.d(TAG, " Added desc:" + xpp.getText());
 	        } else if (xpp.getName().equals(LATITUDE_TAG)) {
 	        	eventType = xpp.next();
 	        	if (eventType == XmlPullParser.TEXT) {
 	        		item.setLatitude(Float.parseFloat(xpp.getText()));
 	        	}
-	            Log.d(TAG, " Added desc:" + xpp.getText());
 	        } else if (xpp.getName().equals(VENUE_URL)) {
 	        	eventType = xpp.next();
 	        	if (eventType == XmlPullParser.TEXT) {
 	        		item.setVenueUrl(xpp.getText());
 	        	}
-	            Log.d(TAG, " Added eventu_url:" + xpp.getText());
+	           // Log.d(TAG, " Added eventu_url:" + xpp.getText());
 	        }
         }
     }
@@ -228,19 +218,6 @@ public class EventFetcher{
            eventType = parser.next();
         }
         
-//        while (eventType != XmlPullParser.END_DOCUMENT) {
-//            if (eventType == XmlPullParser.START_TAG &&
-//                XML_EVENT.equals(parser.getName())) {
-//                String id = parser.getAttributeValue(null, "id");
-//                String caption = parser.getAttributeValue(null, "title");
-//                String smallUrl = parser.getAttributeValue(null, EXTRA_SMALL_URL);
-//
-//                GalleryItem item = new GalleryItem();
-//                item.setId(id);
-//                item.setCaption(caption);
-//                item.setUrl(smallUrl);
-//                items.add(item);
-//            }
 
             eventType = parser.next();
         }
