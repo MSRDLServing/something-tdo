@@ -102,10 +102,18 @@ public class MapActivity extends Activity {
 			String cityName;
 			String time;
 			String prefs;
+			String[] date;
 			
     		cityName = this.dh.searchAndGet(user).get(2);
     		time = this.dh.searchAndGet(user).get(1);
     		prefs = this.dh.searchAndGet(user).get(3);
+    		
+    		date = time.split("/");
+    		
+//    		time = date[2] + "0" + date[1] + date[0] + "00";
+    		
+//    		time = time + "-" + time;
+ 
     		
     		Log.d("Map", cityName);
 			Log.d("Map", time);
@@ -149,6 +157,8 @@ public class MapActivity extends Activity {
 	    	
 	    	System.out.println(cityname);
 			
+	    	
+	    	
 			String data = null;
 			try {
 				data = ((new EventHttpClient()).getEventsData(1, cityname, time, prefs));
@@ -169,12 +179,12 @@ public class MapActivity extends Activity {
 	    protected void onPostExecute(Events mEvents) {
 	    	
 	    	if (mEvents.getSearchCount() > 1) {
-	    		for (int i = 0; i < 10; i++){ 
+	    		for (int i = 0; i < 20; i++){ 
 	    			Event ev = mEvents.getEvent(i);
 	    			createMarkers(ev.getLatitude(), 
 	    					ev.getLongitude(), 
 	    					ev.getTitle(), 
-	    					ev.getVenue() + "\n" +  ev.getStreetAddress() + "\n" + ev.getStartTime(),
+	    					ev.getVenue() + "\n" +  ev.getStreetAddress() + "\n" + ev.getDate(),
 	    					BitmapDescriptorFactory.HUE_RED);
 	    		}
 	    	}

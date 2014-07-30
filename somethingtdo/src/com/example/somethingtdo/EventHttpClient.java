@@ -10,7 +10,7 @@ import android.util.Log;
 
 public class EventHttpClient {
 
-		public static final int PAGE_SIZE = 10;
+		public static final int PAGE_SIZE = 20;
 		private static final String TAG = "EventHttpClient";
 		private static String API_URL = "http://api.eventful.com/json/events/search?";
 		private static String SORT_URL = "&sort_order=date";
