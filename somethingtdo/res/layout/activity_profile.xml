@@ -15,6 +15,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="22dp"
+            android:textColor="@color/custom_theme_text"
             android:text="Your Profile"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -25,6 +26,7 @@
             android:layout_below="@+id/textView1"
             android:layout_marginTop="32dp"
             android:layout_toLeftOf="@+id/textView1"
+            android:textColor="@color/custom_theme_text"
             android:text="Name"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -35,6 +37,7 @@
             android:layout_alignLeft="@+id/textView2"
             android:layout_below="@+id/textView2"
             android:layout_marginTop="25dp"
+            android:textColor="@color/custom_theme_text"
             android:text="Date Set"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -45,6 +48,7 @@
             android:layout_alignLeft="@+id/textView3"
             android:layout_below="@+id/textView3"
             android:layout_marginTop="29dp"
+            android:textColor="@color/custom_theme_text"
             android:text="Location Set"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -54,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/textView4"
             android:layout_centerVertical="true"
+            android:textColor="@color/custom_theme_text"
             android:text="Your Interests"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -65,6 +70,7 @@
             android:layout_alignBottom="@+id/textView2"
             android:layout_alignParentRight="true"
             android:layout_marginRight="39dp"
+            android:textColor="@color/custom_theme_text"
             android:text="username"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -74,6 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textView3"
             android:layout_alignRight="@+id/textView6"
+            android:textColor="@color/custom_theme_text"
             android:text="date"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -83,6 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textView4"
             android:layout_alignRight="@+id/textView7"
+            android:textColor="@color/custom_theme_text"
             android:text="location"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -93,6 +101,7 @@
             android:layout_alignBaseline="@+id/textView5"
             android:layout_alignBottom="@+id/textView5"
             android:layout_alignLeft="@+id/textView8"
+            android:textColor="@color/custom_theme_text"
             android:text="interests"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 

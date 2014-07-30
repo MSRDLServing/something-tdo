@@ -91,10 +91,6 @@ public class PrefsActivity extends Activity {
 	String msg = "";
 	for (int i = 0; i < len; i++) {
 		interests[i].setChecked(true);
-//		if (planets[i].isChecked()) {
-//			Log.d(TAG, planets[i].getName());
-//			msg += (planets[i].getName() + ":");
-//		}
 	}
 	int num = mainListView.getChildCount();
 	CheckBox checkBox;
@@ -103,8 +99,6 @@ public class PrefsActivity extends Activity {
 		checkBox = (CheckBox)row.findViewById( R.id.CheckBox01);
 		checkBox.setChecked(true);
 	}
-//	Log.d(TAG, "All selected 2:" + msg);
-//	Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 	
   }
   
@@ -113,10 +107,6 @@ public class PrefsActivity extends Activity {
 	String msg = "";
 	for (int i = 0; i < len; i++) {
 		interests[i].setChecked(false);
-//		if (planets[i].isChecked()) {
-//			Log.d(TAG, planets[i].getName());
-//			msg += (planets[i].getName() + ":");
-//		}
 	}
 	int num = mainListView.getChildCount();
 	CheckBox checkBox;
@@ -125,8 +115,6 @@ public class PrefsActivity extends Activity {
 		checkBox = (CheckBox)row.findViewById( R.id.CheckBox01);
 		checkBox.setChecked(false);
 	}
-//	Log.d(TAG, "All selected 2:" + msg);
-//	Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 	
   }
   

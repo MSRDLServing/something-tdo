@@ -62,8 +62,6 @@ public static String retrievePassword(){
 		this.dh = new DatabaseHelper(this);
 		List<String> names = this.dh.selectAll(username, password);
 		if (names.size() > 0) { // Login successful
-			// Save username as the name of the player
-			// Save username as the name of the player
 			loginDet = PreferenceManager
 					.getDefaultSharedPreferences(this);
 			SharedPreferences.Editor editor = loginDet.edit();
@@ -71,12 +69,8 @@ public static String retrievePassword(){
 			editor.putString(PASS, password);
 			editor.commit();
 
-			// Bring up the GameOptions screen
+			// Go to main screen
 			startActivity(new Intent(this, MainActivity.class));
-//			 startActivity(new Intent(this, DummyActivity.class));
-			
-//			  Intent myIntent = new Intent(this, MainActivity.class);
-//			  startActivityForResult(myIntent, 0);
 			
 			//finish();
 		} else {

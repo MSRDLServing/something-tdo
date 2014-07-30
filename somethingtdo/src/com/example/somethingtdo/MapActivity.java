@@ -76,9 +76,6 @@ public class MapActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
 		
-		
-//		System.out.println(mEvents.getEvent(0).toString());
-		
         if (googleMap == null) {
             googleMap = ((MapFragment) getFragmentManager().findFragmentById(
                     R.id.map)).getMap();
@@ -90,26 +87,33 @@ public class MapActivity extends Activity {
                         "Sorry! unable to create maps", Toast.LENGTH_SHORT)
                         .show();
             }
-    		//new JSONEvent().execute("1 Columbus today music,comedy");
 
-            googleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter());
-            
+            googleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter());       
             googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             googleMap.setMyLocationEnabled(true);
             googleMap.getUiSettings().setMyLocationButtonEnabled(true);
             
             
 	    	GPSTracker gpsTracker = new GPSTracker(getApplicationContext());
-//	    	String cityName = gpsTracker.getLocality(getApplicationContext());
 	    	
 			String user = LoginActivity.retrieveUsername();
 			this.dh = new DatabaseHelper(this);
 			
 			String cityName;
 			String time;
+			String prefs;
+			String[] date;
 			
     		cityName = this.dh.searchAndGet(user).get(2);
     		time = this.dh.searchAndGet(user).get(1);
+    		prefs = this.dh.searchAndGet(user).get(3);
+    		
+    		date = time.split("/");
+    		
+//    		time = date[2] + "0" + date[1] + date[0] + "00";
+    		
+//    		time = time + "-" + time;
+ 
     		
     		Log.d("Map", cityName);
 			Log.d("Map", time);
@@ -118,7 +122,7 @@ public class MapActivity extends Activity {
 	    	LatLng latlng = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
 	    	googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 11));
             
-    		new JSONEvent().execute(cityName,time);
+    		new JSONEvent().execute(cityName,time,prefs);
 
         }
 	}
@@ -145,60 +149,42 @@ public class MapActivity extends Activity {
 
 		@Override
 		protected Events doInBackground(String... params) {
-			String pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("selectedInterests", null);
-			System.out.println(pref);
+//			String pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("selectedInterests", null);			System.out.println(pref);
 	    	
 	    	String cityname = params[0];
 	    	String time = params[1];
+	    	String prefs = params[2];
 	    	
 	    	System.out.println(cityname);
 			
+	    	
+	    	
 			String data = null;
 			try {
-				data = ((new EventHttpClient()).getEventsData(1, cityname, time, pref));
+				data = ((new EventHttpClient()).getEventsData(1, cityname, time, prefs));
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			Log.d("SUCCESS", data);
-			
 
-//			Log.d("Before Event Parser",null);
-			System.out.println("Before EventParser");
 			Events events = null;
 			try {
 				events = (new EventParser(data)).getEvents();
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
-			
-			System.out.println("After EventParser");
-			
-//			System.out.println(events.getEvent(0).toString());
 						
-			
 			return events;
 		}
 		
-		
-/*		
-		protected void onProgressUpdate(Integer ...progress) {
-			setProgressPercent(progress[0]);
-	    }
-*/
 	    protected void onPostExecute(Events mEvents) {
-	        // TODO: check this.exception 
-	        // TODO: do something with the feed
-	    	
-	    	//System.out.println("MapsActivity " + mEvents.getEvent(0).toString());
-	    	
 	    	
 	    	if (mEvents.getSearchCount() > 1) {
-	    		for (int i = 0; i < 10; i++){ 
+	    		for (int i = 0; i < 20; i++){ 
 	    			Event ev = mEvents.getEvent(i);
 	    			createMarkers(ev.getLatitude(), 
 	    					ev.getLongitude(), 
 	    					ev.getTitle(), 
-	    					ev.getVenue() + "\n" +  ev.getStreetAddress() + "\n" + ev.getStartTime(),
+	    					ev.getVenue() + "\n" +  ev.getStreetAddress() + "\n" + ev.getDate(),
 	    					BitmapDescriptorFactory.HUE_RED);
 	    		}
 	    	}

@@ -29,8 +29,6 @@ public class JSONEvent extends AsyncTask<String, Integer, Events>  {
 				e.printStackTrace();
 			}
 			
-//			System.out.println(events.getEvent(0).toString());
-			
 			return events;
 		}
 			

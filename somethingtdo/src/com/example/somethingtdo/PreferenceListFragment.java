@@ -41,17 +41,11 @@ public class PreferenceListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        Log.d(TAG, "OnCreate PreferenceList");
-        
         setHasOptionsMenu(true); //Notify the OS to create action bar.
         
         getActivity().setTitle(R.string.app_name);
         mPreferences = PreferenceLab.get(getActivity()).getPreferences();
-        
-
-		
-		//mPreferences = PreferenceLab.get(getActivity()).loadPreferences();
-        
+        		        
         PreferenceAdapter adapter = new PreferenceAdapter(mPreferences);
         setListAdapter(adapter);
 	}
@@ -169,12 +163,6 @@ public class PreferenceListFragment extends ListFragment {
 	        	List <String> profile = this.dh.searchAndGet(user);
 	    		mInterests = profile.get(3);
 	    		
-	    		Log.d(TAG, "mInterests " + mInterests + "for user " + user);
-	        	
-//	            Intent i = new Intent(getActivity(), CrimePagerActivity.class);
-//	            i.putExtra(PreferenceFragment.EXTRA_CRIME_ID, crime.getId());
-//	            startActivityForResult(i, 0);
-//	        	startActivity(new Intent(getActivity(), MapActivity.class));
 	            return true;
 	        case R.id.menu_item_select_all:
 	        	
@@ -207,60 +195,4 @@ public class PreferenceListFragment extends ListFragment {
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
-
-/*
-	@Override
-	public void onResume()
-	{
-		  super.onResume();
-//        mAppContext = getApplicationContext();
-        
-        mPreferences = new ArrayList<Preference>();  
-        mSerializer = new PreferenceIntentJSONSerializer(mAppContext, FILENAME);
-
-        Preference[] tempPref = 
-        		new Preference[] {
-    		  new Preference("Concert","music"), new Preference("Comedy","comedy"), new Preference("Performing Arts","performing_arts"), 
-	          new Preference("Sports","sports"), new Preference("Film","movies-film"), new Preference("Galleries","art"), 
-	          new Preference("Literary","books"), new Preference("Food","food"), new Preference("Festivals","festivals_parades")
-        };
-        
-      
-        
-        //Consult the loaded value to set isChecked flag.
-      //  ArrayList<Preference> loadedList = loadPreferences();
-		String user = LoginActivity.retrieveUsername();
-		this.dh = new DatabaseHelper(mAppContext);
-		List <String> profile = this.dh.searchAndGet(user);
-		
-		mInterests = profile.get(3);
-		
-		Log.d(TAG, "mInterests " + mInterests + "for user " + user);
-		
-		String[] interestsArr = mInterests.split(",");
-		
-		Log.d(TAG, interestsArr[0]);
-		
-    	Preference s;
-    	int len = interestsArr.length;
-    	for (int i = 0; i < len; i++) {
-    		
-    		Log.d(TAG, interestsArr[i]);
-    		for (int j = 0; j < tempPref.length; j++){
-    			
-    			if (interestsArr[i].equals(tempPref[j].getId())) {
-    				
-    				Log.d(TAG, "Match Found");
-    				tempPref[j].setChecked(true);
-    			}
-    		}
-
-    	}
-    	
-    	mPreferences.addAll(Arrays.asList(tempPref));
-
-    	Log.d(TAG, " after consulting the loaded json file:" + mPreferences.toString());
-		
-	}
-*/
 }

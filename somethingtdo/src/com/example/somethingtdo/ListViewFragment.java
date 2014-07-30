@@ -36,14 +36,14 @@ public class ListViewFragment extends ListFragment {
 		
 		String cityName;
 		String time;
+		String prefs;
 		
 		cityName = this.dh.searchAndGet(user).get(2);
 		time = this.dh.searchAndGet(user).get(1);
+		prefs = this.dh.searchAndGet(user).get(3);
 
-//        new FetchItemsTask().execute();
-      new FetchItemsTask().execute(cityName, time);
+      new FetchItemsTask().execute(cityName, time, prefs);
     
-//        mEvents = EventLab.get(getActivity()).loadEvents();
 	}
 	
 	@Override
@@ -100,8 +100,6 @@ public class ListViewFragment extends ListFragment {
 				@Override
 				public void onClick(View v) {
 		            Intent i = new Intent(getActivity(), SendNotificationActivity.class);
-//		            i.putExtra(PreferenceFragment.EXTRA_CRIME_ID, crime.getId());
-//		            startActivityForResult(i, 0);
 		            startActivity(i);
 				}
 			});
@@ -113,21 +111,15 @@ public class ListViewFragment extends ListFragment {
     private class FetchItemsTask extends AsyncTask<String,Void,ArrayList<Event>> {
         @Override
         protected ArrayList<Event> doInBackground(String... params) {
-//        	new EventFetcher(mEventLab).fetchItems();
         	String filter = PreferenceManager.getDefaultSharedPreferences(getActivity())
         					.getString(PreferenceListFragment.SELECTED_INTEREST, null);
         	
         	String cityname = params[0];
         	String time = params[1];
+        	String prefs = params[2];
         	
         	
-        	ArrayList<Event> mEvents = new EventFetcher(mEventLab).getEventsData(1, cityname, "This Week", filter);
-//        	try {
-//        		String data = (new EventHttpClient()).getTestData();
-//        		Log.d(TAG, "retrieved data:" + data);
-//        	} catch (IOException e) {
-//        		Log.e(TAG, " IO exception!");
-//        	}
+        	ArrayList<Event> mEvents = new EventFetcher(mEventLab).getEventsData(1, cityname, "This Week", prefs);
         	
             return mEvents;
         }

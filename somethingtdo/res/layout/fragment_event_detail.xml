@@ -8,6 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="@string/event_title_label"
+    android:textColor="@color/custom_theme_text"
     style="?android:listSeparatorTextViewStyle"
     />
   
@@ -15,6 +16,7 @@
     android:id="@+id/event_title"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:textColor="@color/custom_theme_text"
     android:text="@string/event_title_label"
     />
   
@@ -22,12 +24,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="@string/event_date_label"
+    android:textColor="@color/custom_theme_text"
     style="?android:listSeparatorTextViewStyle"
     />
   <TextView
     android:id="@+id/event_date"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:textColor="@color/custom_theme_text"
     android:text="@string/event_date_label"
     />
   
@@ -35,18 +39,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="@string/event_location_label"
+    android:textColor="@color/custom_theme_text"
     style="?android:listSeparatorTextViewStyle"
     />
   <TextView
     android:id="@+id/event_location"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:textColor="@color/custom_theme_text"
     android:text="@string/event_location_label"
     />
   
   <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:textColor="@color/custom_theme_text"
     android:text="@string/event_detail_label"
     style="?android:listSeparatorTextViewStyle"
     />
@@ -54,6 +61,7 @@
     android:id="@+id/event_detail"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:textColor="@color/custom_theme_text"
     android:text="@string/event_detail_label"
     />
   
@@ -62,6 +70,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
+    android:textColor="@color/custom_theme_text"
     android:text="@string/event_url"
     />
 </LinearLayout>

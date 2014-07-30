@@ -54,15 +54,12 @@ public class GPSTracker extends Service implements LocationListener
     {
         try
         {
-        	Log.d("test","Trying getLocation()");
         	
             locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
 
-            Log.d("test","Getting GPS status");
             //getting GPS status
             isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-            Log.d("test","Getting network status");
             //getting network status
             isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
@@ -73,19 +70,13 @@ public class GPSTracker extends Service implements LocationListener
             }
             else
             {
-               // this.canGetLocation = true;
-
-            	Log.d("Test", "getting location from network provider");
                 //First get location from Network Provider
                 if (isNetworkEnabled)
                 {
-                	Log.d("Test", "inside if, before locationmanager.request");
                     locationManager.requestLocationUpdates(
                             LocationManager.NETWORK_PROVIDER,
                             MIN_TIME_BW_UPDATES,
                             MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-                    Log.d("Test", "inside if, after locationmanager.request");
-                    Log.d("Network", "Network");
 
                     if (locationManager != null)
                     {
@@ -93,8 +84,6 @@ public class GPSTracker extends Service implements LocationListener
                         updateGPSCoordinates();
                     }
                 
-
-            	Log.d("Test", "getting lat/long from GPS services");
                 //if GPS Enabled get lat/long using GPS Services
                 if (isGPSEnabled)
                 {
@@ -104,8 +93,6 @@ public class GPSTracker extends Service implements LocationListener
                                 LocationManager.GPS_PROVIDER,
                                 MIN_TIME_BW_UPDATES,
                                 MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-
-                        Log.d("GPS Enabled", "GPS Enabled");
 
                        if (locationManager != null)
                         {

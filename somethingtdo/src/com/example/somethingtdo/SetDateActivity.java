@@ -40,9 +40,6 @@ public class SetDateActivity extends FragmentActivity {
 	int mMonth = c.get(Calendar.MONTH);
 	int mDay = c.get(Calendar.DAY_OF_MONTH);
 	private DatabaseHelper dh;
-	/*int mDay = 15; 
-	int mMonth = 7; // August, month starts from 0
-	int mYear= 2012;*/
 	
 	/** This handles the message send from DatePickerDialogFragment on setting date */
 	Handler mHandler = new Handler(){
@@ -59,8 +56,7 @@ public class SetDateActivity extends FragmentActivity {
     		
     		/** Getting the year from bundle */
     		mYear = b.getInt("set_year");
-    		
-    		//TO-DO:- Add to shared preference
+
     		savingPreference(Integer.toString(mDay),Integer.toString(mMonth+1),Integer.toString(mYear));
     		savedDate.setText(retrievePreference());
     		/** Displaying a short time message containing date set by Date picker dialog fragment */
@@ -89,13 +85,6 @@ public class SetDateActivity extends FragmentActivity {
 	
 	public String retrievePreference(){
 		
-//		SharedPreferences date = getSharedPreferences("date",0);
-		/*setDate = (date.getString("Day","n/a"));
-		setDate += "/";
-		setDate += (date.getString("Month","n/a"));
-		setDate += "/";
-		setDate += (date.getString("Year","n/a"));*/
-
 		setDate = (date.getString("Year","n/a"));
 		setDate += (date.getString("Month","n/a"));
 		setDate += (date.getString("Day","n/a"));
@@ -121,11 +110,6 @@ public class SetDateActivity extends FragmentActivity {
 			
 			endDate = dateFormat.format(endCal.getTime());
 			
-			/*endDate = (date.getString("Year","n/a"));
-			endDate += (date.getString("Month","n/a"));
-			endDate += Integer.toString(mEndDay);
-			endDate += "00";
-				*/
 			return endDate;
 	}
 			
@@ -136,10 +120,6 @@ public class SetDateActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_set_date);
 
-		/*if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}*/
 		savedDate= (TextView)findViewById(R.id.textView1);
 		if(date!= null)
 			savedDate.setText(retrievePreference());
@@ -187,43 +167,4 @@ public class SetDateActivity extends FragmentActivity {
         /** Setting click event listener for the button */
         btnSet.setOnClickListener(listener);
 	}
-/*
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.set_date, menu);
-		return true;
-	}
-*/
-
-	/*@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	/*public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_set_date,
-					container, false);
-			return rootView;
-		}
-	}*/
-
 }

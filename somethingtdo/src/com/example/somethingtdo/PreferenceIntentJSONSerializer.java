@@ -77,7 +77,6 @@ public class PreferenceIntentJSONSerializer {
             if (reader != null)
                 reader.close();
         }
-        Log.d(TAG, " loaded from JSON:" + preferences.toString());
         return preferences;
 //        return xmlString;
     }

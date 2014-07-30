@@ -17,12 +17,20 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome to Something T'Do!\n
-            To get started swipe right, or click on the Tool Button above"
-            android:layout_gravity="center"
+            android:text="Welcome to something t'do!"
+            android:layout_marginTop="120dp"
+            android:layout_marginLeft="15dp"
+            android:textColor="@color/custom_theme_text"
             android:textAppearance="?android:attr/textAppearanceLarge" />
-        
-
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="160dp"
+            android:layout_marginLeft="15dp"
+            android:text="To get started swipe right, or click on the Tool Button above"
+            android:textColor="@color/custom_theme_text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />    
     </FrameLayout>
      
     <!-- Main Drawer Content -->

@@ -5,7 +5,8 @@
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     
-    <color name= "custom_theme_color">#B0B0FF</color>
+ 	<color name= "custom_theme_color">#0082ba</color>
+ 	<color name= "custom_theme_text">#ffffff</color>
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
