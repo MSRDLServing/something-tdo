@@ -95,8 +95,8 @@ public class Event {
 		return convertDate(mDate);
 	}
 	
-	public Date getStartTime() {
-		return convertDate (mStartTime);
+	public String getStartTime() {
+		return mStartTime;
 	}
 	
 	public String getDescription() {
