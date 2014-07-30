@@ -158,7 +158,6 @@ public class MapActivity extends Activity {
 	    	System.out.println(cityname);
 			
 	    	
-	    	
 			String data = null;
 			try {
 				data = ((new EventHttpClient()).getEventsData(1, cityname, time, prefs));
@@ -184,7 +183,7 @@ public class MapActivity extends Activity {
 	    			createMarkers(ev.getLatitude(), 
 	    					ev.getLongitude(), 
 	    					ev.getTitle(), 
-	    					ev.getVenue() + "\n" +  ev.getStreetAddress() + "\n" + ev.getDate(),
+	    					ev.getVenue() + "\n" +  ev.getStreetAddress() + "\n" + ev.getStartTime(),
 	    					BitmapDescriptorFactory.HUE_RED);
 	    		}
 	    	}

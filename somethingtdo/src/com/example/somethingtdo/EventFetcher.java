@@ -37,7 +37,7 @@ public class EventFetcher{
     private static final String LATITUDE_TAG = "latitude";
     private static final String VENUE_URL = "venue_url";
 
-	public static final int PAGE_SIZE = 10;
+	public static final int PAGE_SIZE = 20;
 	private static String API_URL = "http://api.eventful.com/events/search?";
 	private static String SORT_URL = "&sort_order=date";
 	private static String KEY_URL = "&app_key=m6Wj5dR94NQ5jhs5";

@@ -24,7 +24,7 @@ public class Event {
 	
 	private static final String JSON_ID = "id";
     private static final String JSON_TITLE = "title";
-    private static final String JSON_STARTTIME = "starttime";
+    private static final String JSON_STARTTIME = "start_time";
     private static final String JSON_LOCATION = "location";
     private static final String JSON_DESCRIPTION = "description";
     private static final String JSON_LONGITUDE = "longitude";

@@ -50,9 +50,12 @@ public class AccountActivity extends Activity implements OnClickListener {
 		
 		GPSTracker gpsTracker = new GPSTracker(this);
 		String mCity = gpsTracker.getLocality(this);
-		if(mCity==null){
+		 
+		if (mCity == null) {
+			
 			mCity = "Location not set";
 		}
+		
 		return mCity;
 	}
 	
